@@ -4,21 +4,22 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const app = express();
 
-// Aumentamos el límite para que soporte archivos PPTX pesados
+// Aumentamos el límite para soportar archivos pesados
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Configuración de CORS para aceptar peticiones desde tu GitHub Pages
+// Configuración de CORS
 app.use(cors({
-    origin: '*' // Cuando esté listo, cambia '*' por 'https://divaldinn.github.io'
+    origin: '*' 
 }));
 
-// Configura tu correo (Gmail requiere 'App Password', no tu contraseña normal)
+// Configura tu correo usando VARIABLES DE ENTORNO (Más seguro)
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'tucorreo@gmail.com', // ⚠️ CAMBIA ESTO
-        pass: 'tu_contraseña_de_aplicacion' // ⚠️ CAMBIA ESTO (Generar en Google Account > Security)
+        // Aquí le decimos que busque las variables en Render
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS 
     }
 });
 
@@ -26,12 +27,12 @@ app.post('/enviar-ppt', async (req, res) => {
     const { correos, nombreArchivo, archivo, mensaje } = req.body;
 
     try {
-        // Convertir base64 a Buffer
         const base64Data = archivo.replace(/^data:application\/vnd.openxmlformats-officedocument.presentationml.presentation;base64,/, "");
         const buffer = Buffer.from(base64Data, 'base64');
 
         const mailOptions = {
-            from: 'Reportes Convergint <tucorreo@gmail.com>',
+            // Usamos la misma variable para el remitente
+            from: `Reportes Convergint <${process.env.EMAIL_USER}>`, 
             to: correos,
             subject: `Nuevo Reporte Generado: ${nombreArchivo}`,
             text: mensaje || 'Adjunto encontrarás el reporte de servicio.',
