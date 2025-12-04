@@ -1,4 +1,12 @@
 // ==========================================
+// CONFIGURACIÓN DEL SERVIDOR (BACKEND)
+// ==========================================
+// ⚠️ IMPORTANTE: Cambia esta URL por la que te dé Render.com al subir tu servidor
+const BACKEND_URL = "https://backend-reportes.onrender.com/enviar-ppt"; 
+// Si estás probando en tu compu, usa: "http://localhost:3000/enviar-ppt"
+
+
+// ==========================================
 // 1. DICCIONARIO DE TRADUCCIONES
 // ==========================================
 const translations = {
@@ -104,7 +112,6 @@ const staffDirectory = {
 // ==========================================
 // 3. FUNCIÓN DE LOGIN (GLOBAL)
 // ==========================================
-// Esta función está fuera del DOMContentLoaded para que el botón HTML la encuentre siempre
 function checkLogin() {
     console.log("Validando usuario...");
     
@@ -128,14 +135,12 @@ function checkLogin() {
         for (const [nombre, emailStaff] of Object.entries(staffDirectory)) {
             if (emailStaff.toLowerCase() === email) {
                 nombreSelect.value = nombre;
-                // Forzar evento change para que oculte campos manuales si estaban visibles
                 nombreSelect.dispatchEvent(new Event('change'));
                 encontrado = true;
                 break;
             }
         }
 
-        // Si no está en lista, marcar "Otro" y rellenar email
         if (!encontrado) {
             nombreSelect.value = 'Otro';
             nombreSelect.dispatchEvent(new Event('change'));
@@ -158,7 +163,6 @@ function checkLogin() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Permitir tecla ENTER en el input de login
     const loginEmailInput = document.getElementById('loginEmail');
     if(loginEmailInput) {
         loginEmailInput.addEventListener('keypress', (e) => { 
@@ -298,20 +302,26 @@ async function generatePowerPoint() {
         if (logoConvergintBase64) slide1.addImage({ data: logoConvergintBase64, x: 7.5, y: 0.3, w: 2.2, h: 1.2 });
         slide1.addText("REPORTE DE SERVICIO", { x: 0.5, y: 0.8, w: 6, h: 1, fontSize: 28, color: C_WHITE, bold: true, fontFace: 'Arial' });
 
+        // AJUSTE: Subimos un poco el inicio (de 2.0 a 1.6) y reducimos el espaciado (de 0.45 a 0.40)
+        // para que quepan las horas sin chocar con el pie de página.
         const drawRow = (label, value, idx) => {
-            const y = 2.0 + (idx * 0.45);
+            const y = 1.6 + (idx * 0.40); 
             slide1.addText(label, { x: 0.5, y: y, w: 2.5, h: 0.3, fontSize: 12, color: 'CCCCCC', bold: true });
             slide1.addText(value || "---", { x: 3.0, y: y, w: 5, h: 0.3, fontSize: 14, color: C_WHITE });
             slide1.addShape(pptx.ShapeType.line, { x: 0.5, y: y + 0.35, w: 6.0, h: 0, line: { color: '4A6fa5', width: 1 } });
         };
 
+        // LISTA DE DATOS EN PORTADA (Ahora incluye horas)
         drawRow("Locación:", data.ubicacion, 0);
         drawRow("Cliente:", data.cliente, 1);
         drawRow("Técnico:", data.nombre, 2);
         drawRow("Supervisor:", data.revisadoPor, 3);
         drawRow("Fecha:", formatDate(data.fecha), 4);
         drawRow("Ticket:", data.ticket, 5);
+        drawRow("Hora Entrada:", data.horarioinicio, 6); // Agregado
+        drawRow("Hora Salida:", data.horariofinal, 7);   // Agregado
 
+        // LOGO CLIENTE EN GRANDE (Derecha)
         slide1.addShape(pptx.ShapeType.rect, { x: 7.2, y: 2.2, w: 2.5, h: 2.5, fill: { color: C_WHITE } });
         slide1.addText("CLIENTE", { x: 7.2, y: 4.8, w: 2.5, align: 'center', fontSize: 10, color: 'CCCCCC' });
         if (logoClienteBase64) slide1.addImage({ data: logoClienteBase64, x: 7.3, y: 2.3, w: 2.3, h: 2.3, sizing: { type: 'contain', w: 2.3, h: 2.3 } });
@@ -356,7 +366,8 @@ async function generatePowerPoint() {
         const filename = `Reporte_${data.cliente || 'Servicio'}_${data.ticket || 'Ref'}.pptx`;
         await pptx.writeFile({ fileName: filename });
 
-        // --- 2. ENVIAR CORREO (BACKEND) ---
+        // --- 2. ENVIAR CORREO (USANDO BACKEND) ---
+        // Generamos el archivo en Base64 sin prefijos para enviarlo limpio
         const pptxBase64 = await pptx.write('base64');
         
         let listaCorreos = [];
@@ -372,24 +383,34 @@ async function generatePowerPoint() {
         
         const correosFinales = [...new Set(listaCorreos)].filter(Boolean).join(',');
 
-        console.log("Enviando a:", correosFinales);
+        console.log("Enviando a servidor:", BACKEND_URL);
+        console.log("Destinatarios:", correosFinales);
 
-        await fetch("http://localhost:3000/enviar-ppt", {
+        if (!correosFinales) {
+            alert("Reporte descargado. (No se envió correo porque no se encontraron destinatarios).");
+            return;
+        }
+
+        const response = await fetch(BACKEND_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 correos: correosFinales,
                 nombreArchivo: filename,
                 archivo: pptxBase64,
-                mensaje: `Hola, adjunto el reporte de ${data.cliente}.\nTécnico: ${data.nombre}`
+                mensaje: `Hola, adjunto el reporte de ${data.cliente}.\nTécnico: ${data.nombre}\nTicket: ${data.ticket}`
             })
         });
 
-        alert("Reporte descargado y enviado por correo a: " + correosFinales);
+        if (response.ok) {
+            alert(`Reporte descargado y enviado correctamente a: ${correosFinales}`);
+        } else {
+            throw new Error("El servidor respondió con error.");
+        }
 
     } catch (err) {
         console.error("ERROR:", err);
-        alert("Reporte descargado. Nota: El envío de correo falló (Verifica que el servidor local esté activo).");
+        alert("Reporte descargado, pero hubo un error enviando el correo. Verifica tu conexión o el servidor Backend.");
     } finally {
         if (btn) {
             btn.innerHTML = originalText;
@@ -476,7 +497,7 @@ function getBase64FromImageElement(img) {
 
 function formatDate(dateStr) {
     if (!dateStr) return "";
-    const date = new Date(dateStr);
+    const date = new Date(dateStr + "T00:00:00"); // Fix zona horaria
     const parts = dateStr.split('-');
     if (parts.length < 3) return dateStr;
     const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
@@ -529,7 +550,7 @@ function safeSetupPreview(inputId, previewContainerId) {
         } else {
             const wrapper = this.closest('.file-upload-wrapper');
             if (wrapper) {
-                const span = wrapper.querySelector('span'); // Fix para que el texto cambie
+                const span = wrapper.querySelector('span'); 
                 if (this.files.length > 0 && span) span.textContent = this.files[0].name;
             }
         }
