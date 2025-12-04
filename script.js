@@ -1,9 +1,9 @@
 // ==========================================
 // CONFIGURACIÓN DEL SERVIDOR (BACKEND)
+// NO TOCAR NADAAAAAAAA!!!! Codigo hecho por Hector Emmanuel Salazar Hernandez a su 16 años :]
 // ==========================================
-// ⚠️ IMPORTANTE: Cambia esta URL por la que te dé Render.com al subir tu servidor
-const BACKEND_URL = "https://backend-reportes.onrender.com/enviar-ppt"; 
-// Si estás probando en tu compu, usa: "http://localhost:3000/enviar-ppt"
+//  CAMBIA ESTO POR TU URL DE RENDER si no funciona o se rompe equi esta laurl del cambio:
+const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
 
 
 // ==========================================
@@ -11,96 +11,51 @@ const BACKEND_URL = "https://backend-reportes.onrender.com/enviar-ppt";
 // ==========================================
 const translations = {
     es: {
-        title: "Reporte de Servicio",
-        subtitle: "Generador Automatizado",
-        projectInfo: "Información del Proyecto",
-        clientLabel: "Nombre del Cliente / Empresa",
-        clientHelp: "* Escribe el nombre y sal para buscar logo.",
-        manualWebLabel: "No encontramos el logo. ¿Cuál es su web?",
-        location: "Locación (Sitio)",
-        preparedBy: "Prepared By (Técnico)",
-        revisedBy: "Revised By (Supervisor)",
-        date: "Date (Fecha)",
-        ticket: "Referencia / Ticket",
-        visitDetails: "Detalles de Visita",
-        visitNo: "No. Visita",
-        startTime: "Hora Entrada",
-        endTime: "Hora Salida",
-        layoutLabel: "Layout (Plano/Esquema)",
-        uploadLayout: "Subir Imagen del Layout",
-        serviceDev: "Desarrollo del Servicio",
-        problemDesc: "Descripción del Problema",
-        photosBefore: "Fotos 'Antes' (Evidencia inicial)",
-        selectPhotos: "Seleccionar fotos",
-        photosAfter: "Fotos 'Después' (Solución)",
-        solutionDesc: "Solución / Trabajo Realizado",
-        closing: "Cierre",
-        diagnosis: "Diagnóstico",
-        finalNotes: "Anotaciones Finales",
+        title: "Reporte de Servicio", subtitle: "Generador Automatizado", projectInfo: "Información del Proyecto",
+        clientLabel: "Nombre del Cliente / Empresa", clientHelp: "* Escribe el nombre y sal para buscar logo.",
+        manualWebLabel: "No encontramos el logo. ¿Cuál es su web?", location: "Locación (Sitio)",
+        preparedBy: "Prepared By (Técnico)", revisedBy: "Revised By (Supervisor)",
+        date: "Date (Fecha)", ticket: "Referencia / Ticket", visitDetails: "Detalles de Visita",
+        visitNo: "No. Visita", startTime: "Hora Entrada", endTime: "Hora Salida",
+        layoutLabel: "Layout (Plano/Esquema)", uploadLayout: "Subir Imagen del Layout",
+        serviceDev: "Desarrollo del Servicio", problemDesc: "Descripción del Problema",
+        photosBefore: "Fotos 'Antes' (Evidencia inicial)", selectPhotos: "Seleccionar fotos",
+        photosAfter: "Fotos 'Después' (Solución)", solutionDesc: "Solución / Trabajo Realizado",
+        closing: "Cierre", diagnosis: "Diagnóstico", finalNotes: "Anotaciones Finales",
         generateBtn: "Generar y Enviar Reporte"
     },
     en: {
-        title: "Service Report",
-        subtitle: "Automated Generator",
-        projectInfo: "Project Information",
-        clientLabel: "Client / Company Name",
-        clientHelp: "* Type name to auto-search logo.",
-        manualWebLabel: "Logo not found. Website?",
-        location: "Location (Site)",
-        preparedBy: "Prepared By (Technician)",
-        revisedBy: "Revised By (Supervisor)",
-        date: "Date",
-        ticket: "Reference / Ticket",
-        visitDetails: "Visit Details",
-        visitNo: "Visit No.",
-        startTime: "Start Time",
-        endTime: "End Time",
-        layoutLabel: "Layout (Blueprint)",
-        uploadLayout: "Upload Layout Image",
-        serviceDev: "Service Development",
-        problemDesc: "Problem Description",
-        photosBefore: "Photos 'Before'",
-        selectPhotos: "Select photos",
-        photosAfter: "Photos 'After'",
-        solutionDesc: "Solution / Work Done",
-        closing: "Closing",
-        diagnosis: "Diagnosis",
-        finalNotes: "Final Notes",
+        title: "Service Report", subtitle: "Automated Generator", projectInfo: "Project Information",
+        clientLabel: "Client / Company Name", clientHelp: "* Type name to auto-search logo.",
+        manualWebLabel: "Logo not found. Website?", location: "Location (Site)",
+        preparedBy: "Prepared By (Technician)", revisedBy: "Revised By (Supervisor)",
+        date: "Date", ticket: "Reference / Ticket", visitDetails: "Visit Details",
+        visitNo: "Visit No.", startTime: "Start Time", endTime: "End Time",
+        layoutLabel: "Layout (Blueprint)", uploadLayout: "Upload Layout Image",
+        serviceDev: "Service Development", problemDesc: "Problem Description",
+        photosBefore: "Photos 'Before'", selectPhotos: "Select photos",
+        photosAfter: "Photos 'After'", solutionDesc: "Solution / Work Done",
+        closing: "Closing", diagnosis: "Diagnosis", finalNotes: "Final Notes",
         generateBtn: "Generate & Send Report"
     },
     pt: {
-        title: "Relatório de Serviço",
-        subtitle: "Gerador Automatizado",
-        projectInfo: "Informações do Projeto",
-        clientLabel: "Nome do Cliente / Empresa",
-        clientHelp: "* Digite o nome para buscar o logotipo.",
-        manualWebLabel: "Logotipo não encontrado. Site?",
-        location: "Localização (Site)",
-        preparedBy: "Preparado Por (Técnico)",
-        revisedBy: "Revisado Por (Supervisor)",
-        date: "Data",
-        ticket: "Referência / Ticket",
-        visitDetails: "Detalhes da Visita",
-        visitNo: "Nº da Visita",
-        startTime: "Hora Entrada",
-        endTime: "Hora Saída",
-        layoutLabel: "Layout (Planta)",
-        uploadLayout: "Carregar Imagem do Layout",
-        serviceDev: "Desenvolvimento",
-        problemDesc: "Descrição do Problema",
-        photosBefore: "Fotos 'Antes'",
-        selectPhotos: "Selecionar fotos",
-        photosAfter: "Fotos 'Depois'",
-        solutionDesc: "Solução / Trabalho",
-        closing: "Encerramento",
-        diagnosis: "Diagnóstico",
-        finalNotes: "Anotações Finais",
+        title: "Relatório de Serviço", subtitle: "Gerador Automatizado", projectInfo: "Informações do Projeto",
+        clientLabel: "Nome do Cliente / Empresa", clientHelp: "* Digite o nome para buscar o logotipo.",
+        manualWebLabel: "Logotipo não encontrado. Site?", location: "Localização (Site)",
+        preparedBy: "Preparado Por (Técnico)", revisedBy: "Revisado Por (Supervisor)",
+        date: "Data", ticket: "Referência / Ticket", visitDetails: "Detalhes da Visita",
+        visitNo: "Nº da Visita", startTime: "Hora Entrada", endTime: "Hora Saída",
+        layoutLabel: "Layout (Planta)", uploadLayout: "Carregar Imagem do Layout",
+        serviceDev: "Desenvolvimento", problemDesc: "Descrição do Problema",
+        photosBefore: "Fotos 'Antes'", selectPhotos: "Selecionar fotos",
+        photosAfter: "Fotos 'Depois'", solutionDesc: "Solução / Trabalho",
+        closing: "Encerramento", diagnosis: "Diagnóstico", finalNotes: "Anotações Finais",
         generateBtn: "Gerar e Enviar"
     }
 };
 
 // ==========================================
-// 2. DIRECTORIO DE PERSONAL
+// 2. DIRECTORIO
 // ==========================================
 const staffDirectory = {
     "Saul Ramirez": "saul.ramirez@convergint.com",
@@ -110,24 +65,19 @@ const staffDirectory = {
 };
 
 // ==========================================
-// 3. FUNCIÓN DE LOGIN (GLOBAL)
+// 3. LOGIN Y HELPERS
 // ==========================================
 function checkLogin() {
-    console.log("Validando usuario...");
-    
     const emailInput = document.getElementById('loginEmail');
     const email = emailInput.value.trim().toLowerCase();
     const loginOverlay = document.getElementById('loginOverlay');
     const mainApp = document.getElementById('mainApp');
     const loginError = document.getElementById('loginError');
 
-    // 1. Verificar Dominio
     if (email.endsWith('@convergint.com')) {
-        // ACCESO CONCEDIDO
         loginOverlay.style.display = 'none';
         mainApp.style.display = 'block';
 
-        // 2. Auto-Seleccionar Técnico
         const nombreSelect = document.getElementById('nombreSelect');
         const emailManual = document.getElementById('emailManual');
         let encontrado = false;
@@ -140,15 +90,12 @@ function checkLogin() {
                 break;
             }
         }
-
         if (!encontrado) {
             nombreSelect.value = 'Otro';
             nombreSelect.dispatchEvent(new Event('change'));
             if(emailManual) emailManual.value = email;
         }
-
     } else {
-        // ACCESO DENEGADO
         if(loginError) loginError.style.display = 'block';
         const card = document.querySelector('.login-card');
         if(card) {
@@ -158,19 +105,10 @@ function checkLogin() {
     }
 }
 
-// ==========================================
-// 4. INICIALIZACIÓN DEL RESTO
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-
     const loginEmailInput = document.getElementById('loginEmail');
-    if(loginEmailInput) {
-        loginEmailInput.addEventListener('keypress', (e) => { 
-            if (e.key === 'Enter') checkLogin(); 
-        });
-    }
+    if(loginEmailInput) loginEmailInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkLogin(); });
 
-    // --- PREVIEWS Y TRADUCCIONES ---
     safeSetupPreview('imgLayout', null);
     safeSetupPreview('fotosAntes', 'previewAntes');
     safeSetupPreview('fotosDespues', 'previewDespues');
@@ -178,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.addEventListener('change', (e) => changeLanguage(e.target.value));
 
-    // --- LOGO AUTOMÁTICO ---
     const inputCliente = document.getElementById('cliente');
     const inputWebManual = document.getElementById('webManual');
     
@@ -198,10 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- MOSTRAR CAMPOS MANUALES DE TÉCNICO ---
     const selectTecnico = document.getElementById('nombreSelect');
     const divManual = document.getElementById('manualTechnicianInput');
-    
     if(selectTecnico && divManual) {
         selectTecnico.addEventListener('change', function() {
             if (this.value === 'Otro') {
@@ -216,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- SUBMIT ---
     const form = document.getElementById('serviceForm');
     if (form) {
         form.addEventListener('submit', async (e) => {
@@ -236,38 +170,28 @@ function changeLanguage(lang) {
     });
 }
 
-// ============================================================================
-// 5. GENERACIÓN PPTX Y ENVÍO
-// ============================================================================
+// ==========================================
+// 4. GENERAR PPTX
+// ==========================================
 async function generatePowerPoint() {
     const btn = document.getElementById('btnPPT');
     const originalText = btn ? btn.innerHTML : "Generar";
-
-    if (btn) {
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...';
-        btn.disabled = true;
-    }
+    if (btn) { btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...'; btn.disabled = true; }
 
     try {
         const data = getFormData();
         const pptx = new PptxGenJS();
-        
-        // --- PPT SETUP ---
         pptx.layout = 'LAYOUT_16x9'; 
         pptx.author = 'Convergint';
         pptx.subject = `Reporte ${data.cliente}`;
 
-        // Colores
         const C_DARK_BLUE = '0e2c49'; 
         const C_WHITE = 'FFFFFF';
         const C_GREY_TXT = '595959';
 
-        // Logos
         let logoConvergintBase64 = null;
         const imgConvergintHidden = document.getElementById('convergintLogoHidden');
-        if (imgConvergintHidden) {
-            try { logoConvergintBase64 = await getBase64FromImageElement(imgConvergintHidden); } catch(e) {}
-        }
+        if (imgConvergintHidden) { try { logoConvergintBase64 = await getBase64FromImageElement(imgConvergintHidden); } catch(e) {} }
 
         let logoClienteBase64 = null;
         const imgLogoVisual = document.getElementById('logoVisual');
@@ -275,7 +199,7 @@ async function generatePowerPoint() {
             try { logoClienteBase64 = await getBase64FromImageElement(imgLogoVisual); } catch (e) { }
         }
 
-        // --- MASTER SLIDE ---
+        // MASTER SLIDE
         const masterObjects = [
              { rect: { x: 0, y: 0, w: '100%', h: 0.8, fill: { color: C_DARK_BLUE } } },
              (logoConvergintBase64 ? 
@@ -293,7 +217,6 @@ async function generatePowerPoint() {
         } else {
             masterObjects.push({ text: { text: data.cliente, x: 7.0, y: 5.25, w: 2.8, align: 'right', fontSize: 10, color: C_WHITE, bold: true } });
         }
-
         pptx.defineSlideMaster({ title: 'CONVERGINT_STYLE', background: { color: 'FFFFFF' }, objects: masterObjects });
 
         // --- SLIDE 1: PORTADA ---
@@ -302,8 +225,7 @@ async function generatePowerPoint() {
         if (logoConvergintBase64) slide1.addImage({ data: logoConvergintBase64, x: 7.5, y: 0.3, w: 2.2, h: 1.2 });
         slide1.addText("REPORTE DE SERVICIO", { x: 0.5, y: 0.8, w: 6, h: 1, fontSize: 28, color: C_WHITE, bold: true, fontFace: 'Arial' });
 
-        // AJUSTE: Subimos un poco el inicio (de 2.0 a 1.6) y reducimos el espaciado (de 0.45 a 0.40)
-        // para que quepan las horas sin chocar con el pie de página.
+        // LISTA DE DATOS (Incluyendo HORAS)
         const drawRow = (label, value, idx) => {
             const y = 1.6 + (idx * 0.40); 
             slide1.addText(label, { x: 0.5, y: y, w: 2.5, h: 0.3, fontSize: 12, color: 'CCCCCC', bold: true });
@@ -311,17 +233,15 @@ async function generatePowerPoint() {
             slide1.addShape(pptx.ShapeType.line, { x: 0.5, y: y + 0.35, w: 6.0, h: 0, line: { color: '4A6fa5', width: 1 } });
         };
 
-        // LISTA DE DATOS EN PORTADA (Ahora incluye horas)
         drawRow("Locación:", data.ubicacion, 0);
         drawRow("Cliente:", data.cliente, 1);
         drawRow("Técnico:", data.nombre, 2);
         drawRow("Supervisor:", data.revisadoPor, 3);
         drawRow("Fecha:", formatDate(data.fecha), 4);
         drawRow("Ticket:", data.ticket, 5);
-        drawRow("Hora Entrada:", data.horarioinicio, 6); // Agregado
-        drawRow("Hora Salida:", data.horariofinal, 7);   // Agregado
+        drawRow("Hora Entrada:", data.horarioinicio, 6);
+        drawRow("Hora Salida:", data.horariofinal, 7);
 
-        // LOGO CLIENTE EN GRANDE (Derecha)
         slide1.addShape(pptx.ShapeType.rect, { x: 7.2, y: 2.2, w: 2.5, h: 2.5, fill: { color: C_WHITE } });
         slide1.addText("CLIENTE", { x: 7.2, y: 4.8, w: 2.5, align: 'center', fontSize: 10, color: 'CCCCCC' });
         if (logoClienteBase64) slide1.addImage({ data: logoClienteBase64, x: 7.3, y: 2.3, w: 2.3, h: 2.3, sizing: { type: 'contain', w: 2.3, h: 2.3 } });
@@ -333,7 +253,7 @@ async function generatePowerPoint() {
             const imgData = await readFileAsBase64(data.imgLayout);
             slide2.addImage({ data: imgData, x: 0.5, y: 1.2, w: 9.0, h: 3.5, sizing: { type: 'contain', w: 9.0, h: 3.5 } });
         }
-
+        
         // --- SLIDE 3: PROBLEMA ---
         const slide3 = pptx.addSlide({ masterName: 'CONVERGINT_STYLE' });
         slide3.addText("DESCRIPCIÓN DEL PROBLEMA", { x: 0.5, y: 0.25, fontSize: 18, color: C_WHITE, bold: true });
@@ -362,20 +282,16 @@ async function generatePowerPoint() {
         slide6.addShape(pptx.ShapeType.rect, { x: 0.5, y: 1.2, w: 9.0, h: 3.5, fill: { color: 'FFFFFF' }, line: { color: C_DARK_BLUE, width: 2 } });
         slide6.addText((data.diagnostico || "") + "\n\n" + (data.resumen || ""), { x: 0.6, y: 1.3, w: 8.8, h: 3.3, fontSize: 14, color: '000000', valign: 'top' });
 
-        // --- 1. DESCARGAR PPT ---
+        // 1. DESCARGAR
         const filename = `Reporte_${data.cliente || 'Servicio'}_${data.ticket || 'Ref'}.pptx`;
         await pptx.writeFile({ fileName: filename });
 
-        // --- 2. ENVIAR CORREO (USANDO BACKEND) ---
-        // Generamos el archivo en Base64 sin prefijos para enviarlo limpio
+        // 2. ENVIAR AL SERVIDOR
         const pptxBase64 = await pptx.write('base64');
         
         let listaCorreos = [];
-        // Correos automáticos
         if (data.emailTecnico) listaCorreos.push(data.emailTecnico);
         if (data.emailSupervisor) listaCorreos.push(data.emailSupervisor);
-        
-        // Correos manuales
         if (data.correosExtras) {
             const extras = data.correosExtras.split(',').map(e => e.trim());
             listaCorreos = [...listaCorreos, ...extras];
@@ -383,14 +299,12 @@ async function generatePowerPoint() {
         
         const correosFinales = [...new Set(listaCorreos)].filter(Boolean).join(',');
 
-        console.log("Enviando a servidor:", BACKEND_URL);
-        console.log("Destinatarios:", correosFinales);
-
         if (!correosFinales) {
-            alert("Reporte descargado. (No se envió correo porque no se encontraron destinatarios).");
+            alert("Reporte descargado. (No se envió correo: Faltan destinatarios).");
             return;
         }
 
+        console.log("Enviando a:", BACKEND_URL);
         const response = await fetch(BACKEND_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -403,24 +317,21 @@ async function generatePowerPoint() {
         });
 
         if (response.ok) {
-            alert(`Reporte descargado y enviado correctamente a: ${correosFinales}`);
+            alert(`Reporte enviado correctamente a: ${correosFinales}`);
         } else {
-            throw new Error("El servidor respondió con error.");
+            throw new Error("El servidor Backend respondió con error.");
         }
 
     } catch (err) {
-        console.error("ERROR:", err);
-        alert("Reporte descargado, pero hubo un error enviando el correo. Verifica tu conexión o el servidor Backend.");
+        console.error("ERROR ENVÍO:", err);
+        alert("Reporte descargado. Hubo un error enviando el correo (Revisa consola o estado del servidor Render).");
     } finally {
-        if (btn) {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        }
+        if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
     }
 }
 
 // ==========================================
-// 6. HELPERS
+// 5. HELPERS
 // ==========================================
 function getFormData() {
     const val = (id) => { const el = document.getElementById(id); return el ? el.value : ""; };
@@ -428,30 +339,21 @@ function getFormData() {
 
     const selectTecnico = document.getElementById('nombreSelect');
     let nombreTec = "", emailTec = "";
-
     if (selectTecnico) {
-        if (selectTecnico.value === 'Otro') {
-            nombreTec = val('nombreManual');
-            emailTec = val('emailManual');
-        } else {
-            nombreTec = selectTecnico.value;
-            emailTec = staffDirectory[nombreTec] || "";
-        }
+        if (selectTecnico.value === 'Otro') { nombreTec = val('nombreManual'); emailTec = val('emailManual'); }
+        else { nombreTec = selectTecnico.value; emailTec = staffDirectory[nombreTec] || ""; }
     }
 
     const selectSup = document.getElementById('revisadoPor');
     let nombreSup = "", emailSup = "";
-    if (selectSup) {
-        nombreSup = selectSup.value;
-        emailSup = staffDirectory[nombreSup] || "";
-    }
+    if (selectSup) { nombreSup = selectSup.value; emailSup = staffDirectory[nombreSup] || ""; }
 
     return {
         cliente: val('cliente'), ubicacion: val('ubicacion'), 
-        nombre: nombreTec, emailTecnico: emailTec,
-        revisadoPor: nombreSup, emailSupervisor: emailSup,
+        nombre: nombreTec, emailTecnico: emailTec, revisadoPor: nombreSup, emailSupervisor: emailSup,
         correosExtras: val('correoDestino'),
-        fecha: val('fecha'), horarioinicio: val('horarioinicio'), horariofinal: val('horariofinal'), ticket: val('ticket'), visita: val('visita'),
+        fecha: val('fecha'), horarioinicio: val('horarioinicio'), horariofinal: val('horariofinal'),
+        ticket: val('ticket'), visita: val('visita'),
         descripcionProblema: val('descripcionProblema'), descDespues: val('descDespues'), diagnostico: val('diagnostico'), resumen: val('resumen'),
         imgLayout: files('imgLayout')[0], fotosAntes: files('fotosAntes'), fotosDespues: files('fotosDespues')
     };
@@ -469,10 +371,7 @@ function fetchAndShowLogo(domain) {
     if (spinner) spinner.style.display = 'block';
 
     const logoUrl = `https://logo.clearbit.com/${domain}?size=500`;
-    const tempImg = new Image();
-    tempImg.crossOrigin = "Anonymous";
-    tempImg.src = logoUrl;
-
+    const tempImg = new Image(); tempImg.crossOrigin = "Anonymous"; tempImg.src = logoUrl;
     tempImg.onload = () => {
         if (spinner) spinner.style.display = 'none';
         if (img) { img.src = logoUrl; img.style.display = 'block'; }
@@ -487,17 +386,15 @@ function fetchAndShowLogo(domain) {
 
 function getBase64FromImageElement(img) {
     return new Promise((resolve, reject) => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
+        const canvas = document.createElement("canvas"); canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0);
         try { resolve(canvas.toDataURL("image/png")); } catch (e) { reject(e); }
     });
 }
 
 function formatDate(dateStr) {
     if (!dateStr) return "";
-    const date = new Date(dateStr + "T00:00:00"); // Fix zona horaria
+    const date = new Date(dateStr + "T00:00:00");
     const parts = dateStr.split('-');
     if (parts.length < 3) return dateStr;
     const months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
@@ -506,10 +403,7 @@ function formatDate(dateStr) {
 
 function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
+        const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file);
     });
 }
 
@@ -538,21 +432,13 @@ function safeSetupPreview(inputId, previewContainerId) {
                 container.innerHTML = '';
                 Array.from(this.files).forEach(file => {
                     const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'preview-img';
-                        container.appendChild(img);
-                    }
+                    reader.onload = (e) => { const img = document.createElement('img'); img.src = e.target.result; img.className = 'preview-img'; container.appendChild(img); }
                     reader.readAsDataURL(file);
                 });
             }
         } else {
             const wrapper = this.closest('.file-upload-wrapper');
-            if (wrapper) {
-                const span = wrapper.querySelector('span'); 
-                if (this.files.length > 0 && span) span.textContent = this.files[0].name;
-            }
+            if (wrapper) { const span = wrapper.querySelector('span'); if (this.files.length > 0 && span) span.textContent = this.files[0].name; }
         }
     });
 }
