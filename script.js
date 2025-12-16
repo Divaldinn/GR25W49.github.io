@@ -1,9 +1,7 @@
 // ==========================================
 // CONFIGURACIÓN DEL SERVIDOR (BACKEND)
-// NO TOCAR NADAAAAAAAA!!!! Codigo hecho por Hector Emmanuel Salazar Hernandez a su 22 años :]
 // ==========================================
 const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
-
 
 // ==========================================
 // 1. DICCIONARIO DE TRADUCCIONES
@@ -11,7 +9,7 @@ const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
 const translations = {
     es: {
         title: "Reporte de Servicio", subtitle: "Generador Automatizado", projectInfo: "Información del Proyecto",
-        clientLabel: "Nombre del Cliente / Empresa", clientHelp: "* Escribe el nombre y sal para buscar logo.",
+        clientLabel: "Nombre del Cliente / Empresa", clientHelp: "* Escribe el nombre y presiona ENTER.",
         manualWebLabel: "No encontramos el logo. ¿Cuál es su web?", location: "Locación (Sitio)",
         preparedBy: "Prepared By (Técnico)", revisedBy: "Revised By (Supervisor)",
         date: "Date (Fecha)", ticket: "Referencia / Ticket", visitDetails: "Detalles de Visita",
@@ -25,7 +23,7 @@ const translations = {
     },
     en: {
         title: "Service Report", subtitle: "Automated Generator", projectInfo: "Project Information",
-        clientLabel: "Client / Company Name", clientHelp: "* Type name to auto-search logo.",
+        clientLabel: "Client / Company Name", clientHelp: "* Type name and press ENTER.",
         manualWebLabel: "Logo not found. Website?", location: "Location (Site)",
         preparedBy: "Prepared By (Technician)", revisedBy: "Revised By (Supervisor)",
         date: "Date", ticket: "Reference / Ticket", visitDetails: "Visit Details",
@@ -39,7 +37,7 @@ const translations = {
     },
     pt: {
         title: "Relatório de Serviço", subtitle: "Gerador Automatizado", projectInfo: "Informações do Projeto",
-        clientLabel: "Nome do Cliente / Empresa", clientHelp: "* Digite o nome para buscar o logotipo.",
+        clientLabel: "Nome do Cliente / Empresa", clientHelp: "* Digite o nome e pressione ENTER.",
         manualWebLabel: "Logotipo não encontrado. Site?", location: "Localização (Site)",
         preparedBy: "Preparado Por (Técnico)", revisedBy: "Revisado Por (Supervisor)",
         date: "Data", ticket: "Referência / Ticket", visitDetails: "Detalhes da Visita",
@@ -64,7 +62,7 @@ const staffDirectory = {
 };
 
 // ==========================================
-// 3. LOGIN Y HELPERS
+// 3. LOGIN Y INICIALIZACIÓN
 // ==========================================
 function checkLogin() {
     const emailInput = document.getElementById('loginEmail');
@@ -105,49 +103,75 @@ function checkLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Evento Login
     const loginEmailInput = document.getElementById('loginEmail');
     if(loginEmailInput) loginEmailInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkLogin(); });
 
+    // Configurar previews de imágenes
     safeSetupPreview('imgLayout', null);
     safeSetupPreview('fotosAntes', 'previewAntes');
     safeSetupPreview('fotosDespues', 'previewDespues');
 
+    // Selector de idioma
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.addEventListener('change', (e) => changeLanguage(e.target.value));
 
-    // --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE PARA DETECTAR NOMBRES ---
+    // ========================================================
+    // ARREGLO DE BÚSQUEDA DE LOGOS (FEDEX, COCA COLA, ETC.)
+    // ========================================================
     const inputCliente = document.getElementById('cliente');
     const inputWebManual = document.getElementById('webManual');
     
-    if (inputCliente) {
-        inputCliente.addEventListener('blur', () => {
-            const clientName = inputCliente.value.trim();
-            if (clientName.length > 1) {
-                // 1. Limpieza básica
-                let cleanName = clientName.toLowerCase();
-                
-                // 2. Definir dominio por defecto
-                let guessDomain = cleanName.replace(/[^a-z0-9]/g, '') + '.com';
+    // Función centralizada para procesar el texto del cliente
+    const procesarBusquedaCliente = () => {
+        const clientName = inputCliente.value.trim();
+        if (clientName.length > 1) {
+            let cleanName = clientName.toLowerCase();
+            // 1. Convertir nombre a dominio tentativo
+            // "Coca Cola" -> "cocacola.com", "Fed Ex" -> "fedex.com"
+            let guessDomain = cleanName.replace(/[^a-z0-9]/g, '') + '.com';
 
-                // 3. Excepciones manuales (Aquí arreglamos FedEx y otros)
-                if (cleanName.includes('fedex')) guessDomain = 'fedex.com';
-                if (cleanName.includes('coca')) guessDomain = 'coca-cola.com';
-                if (cleanName.includes('ford')) guessDomain = 'ford.com';
-                
-                // 4. Llamar a la función de búsqueda
-                fetchAndShowLogo(guessDomain);
+            // 2. Diccionario de excepciones comunes (Correcciones manuales)
+            if (cleanName.includes('coca')) guessDomain = 'coca-cola.com';
+            if (cleanName.includes('fedex')) guessDomain = 'fedex.com';
+            if (cleanName.includes('ford')) guessDomain = 'ford.com';
+            if (cleanName.includes('mercado')) guessDomain = 'mercadolibre.com.mx';
+
+            // 3. Ejecutar búsqueda
+            fetchAndShowLogo(guessDomain);
+        }
+    };
+
+    if (inputCliente) {
+        // Opción A: Al salir del campo (clic fuera)
+        inputCliente.addEventListener('blur', procesarBusquedaCliente);
+        
+        // Opción B: Al presionar ENTER (¡Esto faltaba antes!)
+        inputCliente.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Evitar que el formulario se envíe
+                procesarBusquedaCliente();
             }
         });
     }
 
+    // Búsqueda manual si el usuario escribe en el campo "Web Manual"
     if (inputWebManual) {
-        inputWebManual.addEventListener('blur', () => {
+        const procesarManual = () => {
             const domain = inputWebManual.value.trim();
             if (domain) fetchAndShowLogo(domain);
+        };
+        inputWebManual.addEventListener('blur', procesarManual);
+        inputWebManual.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                procesarManual();
+            }
         });
     }
-    // -----------------------------------------------------------
+    // ========================================================
 
+    // Selector de Técnico Manual
     const selectTecnico = document.getElementById('nombreSelect');
     const divManual = document.getElementById('manualTechnicianInput');
     if(selectTecnico && divManual) {
@@ -164,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Envío del formulario
     const form = document.getElementById('serviceForm');
     if (form) {
         form.addEventListener('submit', async (e) => {
@@ -184,7 +209,63 @@ function changeLanguage(lang) {
 }
 
 // ==========================================
-// 4. GENERAR PPTX
+// 4. FUNCIÓN DE BÚSQUEDA DE LOGOS (MEJORADA)
+// ==========================================
+function fetchAndShowLogo(domain) {
+    // Limpieza de URL
+    domain = domain.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0];
+    
+    const img = document.getElementById('logoVisual');
+    const placeholder = document.getElementById('logoPlaceholder');
+    const spinner = document.getElementById('logoSpinner');
+    const manualInputDiv = document.getElementById('manualWebInput');
+    const inputWebManual = document.getElementById('webManual'); 
+
+    // Resetear UI
+    if (placeholder) placeholder.style.display = 'none';
+    if (img) img.style.display = 'none';
+    if (spinner) spinner.style.display = 'block';
+    if (manualInputDiv) manualInputDiv.style.display = 'none';
+
+    // URLs de las APIs
+    const urlClearbit = `https://logo.clearbit.com/${domain}?size=500`;
+    const urlGoogle = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
+    // Intentar primero con Clearbit (Mejor calidad)
+    img.crossOrigin = "Anonymous"; 
+    img.src = urlClearbit;
+
+    img.onload = () => {
+        if (spinner) spinner.style.display = 'none';
+        img.style.display = 'block';
+    };
+
+    img.onerror = () => {
+        // Si Clearbit falla, intentamos Google
+        // Verificamos si ya estamos intentando con Google para no hacer loop infinito
+        if (img.src.includes('google.com')) {
+            // FALLO TOTAL: Ni Clearbit ni Google
+            if (spinner) spinner.style.display = 'none';
+            if (placeholder) { 
+                placeholder.style.display = 'block'; 
+                placeholder.innerHTML = "No<br>Encontrado"; 
+                placeholder.style.color = "#FF6600"; 
+            }
+            // Mostrar input manual
+            if (manualInputDiv) { 
+                manualInputDiv.style.display = 'block'; 
+                if(inputWebManual) inputWebManual.placeholder = "ej: coca-cola.com";
+            }
+        } else {
+            // Intentar Google como respaldo
+            console.log("Clearbit falló, intentando Google para:", domain);
+            img.src = urlGoogle;
+        }
+    };
+}
+
+// ==========================================
+// 5. GENERAR PPTX
 // ==========================================
 async function generatePowerPoint() {
     const btn = document.getElementById('btnPPT');
@@ -206,10 +287,15 @@ async function generatePowerPoint() {
         const imgConvergintHidden = document.getElementById('convergintLogoHidden');
         if (imgConvergintHidden) { try { logoConvergintBase64 = await getBase64FromImageElement(imgConvergintHidden); } catch(e) {} }
 
+        // Intentar obtener el logo del cliente
         let logoClienteBase64 = null;
         const imgLogoVisual = document.getElementById('logoVisual');
         if (imgLogoVisual && imgLogoVisual.src && imgLogoVisual.style.display !== 'none') {
-            try { logoClienteBase64 = await getBase64FromImageElement(imgLogoVisual); } catch (e) { }
+            try { 
+                logoClienteBase64 = await getBase64FromImageElement(imgLogoVisual); 
+            } catch (e) { 
+                console.warn("No se pudo convertir el logo del cliente (posible bloqueo CORS de Google). Se generará sin logo.");
+            }
         }
 
         // MASTER SLIDE
@@ -238,7 +324,6 @@ async function generatePowerPoint() {
         if (logoConvergintBase64) slide1.addImage({ data: logoConvergintBase64, x: 7.5, y: 0.3, w: 2.2, h: 1.2 });
         slide1.addText("REPORTE DE SERVICIO", { x: 0.5, y: 0.8, w: 6, h: 1, fontSize: 28, color: C_WHITE, bold: true, fontFace: 'Arial' });
 
-        // LISTA DE DATOS (Incluyendo HORAS)
         const drawRow = (label, value, idx) => {
             const y = 1.6 + (idx * 0.40); 
             slide1.addText(label, { x: 0.5, y: y, w: 2.5, h: 0.3, fontSize: 12, color: 'CCCCCC', bold: true });
@@ -344,7 +429,7 @@ async function generatePowerPoint() {
 }
 
 // ==========================================
-// 5. HELPERS
+// 6. HELPERS
 // ==========================================
 function getFormData() {
     const val = (id) => { const el = document.getElementById(id); return el ? el.value : ""; };
@@ -371,66 +456,6 @@ function getFormData() {
         imgLayout: files('imgLayout')[0], fotosAntes: files('fotosAntes'), fotosDespues: files('fotosDespues')
     };
 }
-
-// --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE: FUNCIÓN MEJORADA PARA BUSCAR LOGOS ---
-function fetchAndShowLogo(domain) {
-    // Limpiar protocolo si viene sucio
-    domain = domain.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0];
-    
-    const img = document.getElementById('logoVisual');
-    const placeholder = document.getElementById('logoPlaceholder');
-    const spinner = document.getElementById('logoSpinner');
-    const manualInputDiv = document.getElementById('manualWebInput');
-    const inputWebManual = document.getElementById('webManual'); 
-
-    // Reiniciar UI
-    if (placeholder) placeholder.style.display = 'none';
-    if (img) img.style.display = 'none';
-    if (spinner) spinner.style.display = 'block';
-    if (manualInputDiv) manualInputDiv.style.display = 'none';
-
-    // Definir las dos opciones de URL
-    const urlClearbit = `https://logo.clearbit.com/${domain}?size=500`;
-    const urlGoogle = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-
-    // Intentar primero con Clearbit
-    img.crossOrigin = "Anonymous"; 
-    img.src = urlClearbit;
-
-    // Si carga bien:
-    img.onload = () => {
-        if (spinner) spinner.style.display = 'none';
-        img.style.display = 'block';
-    };
-
-    // Si falla (Error 404 o bloqueado):
-    img.onerror = () => {
-        // Verificamos si ya intentamos con Google (evitar bucle infinito)
-        // Nota: comparamos si la src actual contiene "google.com" porque el navegador a veces expande la URL
-        if (img.src.includes('google.com')) {
-            // Si falló Google también, nos rendimos
-            console.log("Fallaron ambos métodos para:", domain);
-            if (spinner) spinner.style.display = 'none';
-            
-            if (placeholder) { 
-                placeholder.style.display = 'block'; 
-                placeholder.innerHTML = "Logo no<br>encontrado"; 
-                placeholder.style.color = "#FF6600"; 
-            }
-            
-            // Mostrar el campo para que el usuario escriba la web manualmente
-            if (manualInputDiv) { 
-                manualInputDiv.style.display = 'block'; 
-                if(inputWebManual) inputWebManual.placeholder = "ej: fedex.com";
-            }
-        } else {
-            // Si falló Clearbit, intentamos Google
-            console.log("Clearbit falló, intentando Google para:", domain);
-            img.src = urlGoogle;
-        }
-    };
-}
-// ------------------------------------------------------------------------
 
 function getBase64FromImageElement(img) {
     return new Promise((resolve, reject) => {
