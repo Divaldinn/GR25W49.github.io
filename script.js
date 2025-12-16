@@ -119,11 +119,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputCliente = document.getElementById('cliente');
     const inputWebManual = document.getElementById('webManual');
     
+    // === CAMBIO 1: Lógica mejorada para adivinar dominios ===
     if (inputCliente) {
         inputCliente.addEventListener('blur', () => {
             const clientName = inputCliente.value.trim();
-            if (clientName.length > 2) {
-                const guessDomain = clientName.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com';
+            if (clientName.length > 1) {
+                // 1. Limpieza básica
+                let cleanName = clientName.toLowerCase();
+                
+                // 2. Definir dominio por defecto
+                let guessDomain = cleanName.replace(/[^a-z0-9]/g, '') + '.com';
+
+                // 3. Excepciones manuales (¡Aquí arreglamos FedEx y otros!)
+                if (cleanName.includes('fedex')) guessDomain = 'fedex.com';
+                if (cleanName.includes('coca')) guessDomain = 'coca-cola.com';
+                if (cleanName.includes('ford')) guessDomain = 'ford.com';
+                
+                // 4. Llamar a la función de búsqueda
                 fetchAndShowLogo(guessDomain);
             }
         });
@@ -359,37 +371,62 @@ function getFormData() {
     };
 }
 
+// === CAMBIO 2: Función de búsqueda con "Plan B" (Google) ===
 function fetchAndShowLogo(domain) {
+    // Limpiar protocolo si viene sucio
     domain = domain.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0];
+    
     const img = document.getElementById('logoVisual');
     const placeholder = document.getElementById('logoPlaceholder');
     const spinner = document.getElementById('logoSpinner');
     const manualInputDiv = document.getElementById('manualWebInput');
+    const inputWebManual = document.getElementById('webManual'); // Referencia al input manual
 
+    // Reiniciar UI
     if (placeholder) placeholder.style.display = 'none';
     if (img) img.style.display = 'none';
     if (spinner) spinner.style.display = 'block';
+    if (manualInputDiv) manualInputDiv.style.display = 'none';
 
-    const logoUrl = `https://logo.clearbit.com/${domain}?size=500`;
-    const tempImg = new Image(); tempImg.crossOrigin = "Anonymous"; tempImg.src = logoUrl;
-    tempImg.onload = () => {
-        if (spinner) spinner.style.display = 'none';
-        if (img) { img.src = logoUrl; img.style.display = 'block'; }
-        if (manualInputDiv) manualInputDiv.style.display = 'none';
-    };
-    tempImg.onerror = () => {
-        if (spinner) spinner.style.display = 'none';
-        if (placeholder) { placeholder.style.display = 'block'; placeholder.textContent = "No encontrado"; placeholder.style.color = "#FF6600"; }
-        if (manualInputDiv) { manualInputDiv.style.display = 'block'; document.getElementById('webManual').placeholder = "Intenta otro dominio..."; }
-    };
-}
+    // Definir las dos opciones de URL
+    const urlClearbit = `https://logo.clearbit.com/${domain}?size=500`;
+    const urlGoogle = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
 
-function getBase64FromImageElement(img) {
-    return new Promise((resolve, reject) => {
-        const canvas = document.createElement("canvas"); canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0);
-        try { resolve(canvas.toDataURL("image/png")); } catch (e) { reject(e); }
-    });
+    // Intentar primero con Clearbit
+    img.crossOrigin = "Anonymous"; 
+    img.src = urlClearbit;
+
+    // Si carga bien:
+    img.onload = () => {
+        if (spinner) spinner.style.display = 'none';
+        img.style.display = 'block';
+    };
+
+    // Si falla (Error 404 o bloqueado):
+    img.onerror = () => {
+        // Verificamos si ya intentamos con Google para no hacer un bucle infinito
+        if (img.src === urlGoogle) {
+            // Si falló Google también, nos rendimos
+            console.log("Fallaron ambos métodos para:", domain);
+            if (spinner) spinner.style.display = 'none';
+            
+            if (placeholder) { 
+                placeholder.style.display = 'block'; 
+                placeholder.innerHTML = "Logo no<br>encontrado"; 
+                placeholder.style.color = "#FF6600"; 
+            }
+            
+            // Mostrar el campo para que el usuario escriba la web manualmente
+            if (manualInputDiv) { 
+                manualInputDiv.style.display = 'block'; 
+                if(inputWebManual) inputWebManual.placeholder = "ej: fedex.com";
+            }
+        } else {
+            // Si falló Clearbit, intentamos Google
+            console.log("Clearbit falló, intentando Google para:", domain);
+            img.src = urlGoogle;
+        }
+    };
 }
 
 function formatDate(dateStr) {
@@ -442,3 +479,4 @@ function safeSetupPreview(inputId, previewContainerId) {
         }
     });
 }
+
