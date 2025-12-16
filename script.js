@@ -1,8 +1,7 @@
 // ==========================================
 // CONFIGURACIÓN DEL SERVIDOR (BACKEND)
-// NO TOCAR NADAAAAAAAA!!!! Codigo hecho por Hector Emmanuel Salazar Hernandez a su 16 años :]
+// NO TOCAR NADAAAAAAAA!!!! Codigo hecho por Hector Emmanuel Salazar Hernandez a su 22 años :]
 // ==========================================
-//  CAMBIA ESTO POR TU URL DE RENDER si no funciona o se rompe equi esta laurl del cambio:
 const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
 
 
@@ -116,10 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.addEventListener('change', (e) => changeLanguage(e.target.value));
 
+    // --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE PARA DETECTAR NOMBRES ---
     const inputCliente = document.getElementById('cliente');
     const inputWebManual = document.getElementById('webManual');
     
-    // === CAMBIO 1: Lógica mejorada para adivinar dominios ===
     if (inputCliente) {
         inputCliente.addEventListener('blur', () => {
             const clientName = inputCliente.value.trim();
@@ -130,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 2. Definir dominio por defecto
                 let guessDomain = cleanName.replace(/[^a-z0-9]/g, '') + '.com';
 
-                // 3. Excepciones manuales (¡Aquí arreglamos FedEx y otros!)
+                // 3. Excepciones manuales (Aquí arreglamos FedEx y otros)
                 if (cleanName.includes('fedex')) guessDomain = 'fedex.com';
                 if (cleanName.includes('coca')) guessDomain = 'coca-cola.com';
                 if (cleanName.includes('ford')) guessDomain = 'ford.com';
@@ -140,12 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
     if (inputWebManual) {
         inputWebManual.addEventListener('blur', () => {
             const domain = inputWebManual.value.trim();
             if (domain) fetchAndShowLogo(domain);
         });
     }
+    // -----------------------------------------------------------
 
     const selectTecnico = document.getElementById('nombreSelect');
     const divManual = document.getElementById('manualTechnicianInput');
@@ -371,7 +372,7 @@ function getFormData() {
     };
 }
 
-// === CAMBIO 2: Función de búsqueda con "Plan B" (Google) ===
+// --- AQUÍ ESTÁ EL CAMBIO IMPORTANTE: FUNCIÓN MEJORADA PARA BUSCAR LOGOS ---
 function fetchAndShowLogo(domain) {
     // Limpiar protocolo si viene sucio
     domain = domain.replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0];
@@ -380,7 +381,7 @@ function fetchAndShowLogo(domain) {
     const placeholder = document.getElementById('logoPlaceholder');
     const spinner = document.getElementById('logoSpinner');
     const manualInputDiv = document.getElementById('manualWebInput');
-    const inputWebManual = document.getElementById('webManual'); // Referencia al input manual
+    const inputWebManual = document.getElementById('webManual'); 
 
     // Reiniciar UI
     if (placeholder) placeholder.style.display = 'none';
@@ -404,8 +405,9 @@ function fetchAndShowLogo(domain) {
 
     // Si falla (Error 404 o bloqueado):
     img.onerror = () => {
-        // Verificamos si ya intentamos con Google para no hacer un bucle infinito
-        if (img.src === urlGoogle) {
+        // Verificamos si ya intentamos con Google (evitar bucle infinito)
+        // Nota: comparamos si la src actual contiene "google.com" porque el navegador a veces expande la URL
+        if (img.src.includes('google.com')) {
             // Si falló Google también, nos rendimos
             console.log("Fallaron ambos métodos para:", domain);
             if (spinner) spinner.style.display = 'none';
@@ -427,6 +429,15 @@ function fetchAndShowLogo(domain) {
             img.src = urlGoogle;
         }
     };
+}
+// ------------------------------------------------------------------------
+
+function getBase64FromImageElement(img) {
+    return new Promise((resolve, reject) => {
+        const canvas = document.createElement("canvas"); canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d"); ctx.drawImage(img, 0, 0);
+        try { resolve(canvas.toDataURL("image/png")); } catch (e) { reject(e); }
+    });
 }
 
 function formatDate(dateStr) {
@@ -479,4 +490,3 @@ function safeSetupPreview(inputId, previewContainerId) {
         }
     });
 }
-
