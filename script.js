@@ -1,50 +1,71 @@
 // ==========================================
-// CONFIGURACIÓN
+// CONFIGURACIÓN BACKEND
 // ==========================================
 const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
 
 // ==========================================
-// 1. DICCIONARIO DE IDIOMAS
+// 1. DICCIONARIO DE IDIOMAS (CON PLACEHOLDERS)
 // ==========================================
 const translations = {
     es: {
-        title: "Reporte de Servicio", clientLabel: "Cliente / Empresa", clientHelp: "* Presiona la Lupa o Enter para buscar en HD.",
-        manualWebLabel: "No encontrado. ¿Subir manual?", location: "Locación", preparedBy: "Técnico", revisedBy: "Supervisor",
-        date: "Fecha", ticket: "Ticket", visitDetails: "Visita", visitNo: "# Visita", startTime: "Entrada", endTime: "Salida",
-        layoutLabel: "Layout", uploadLayout: "Subir Layout", serviceDev: "Desarrollo", problemDesc: "Problema",
-        photosBefore: "Fotos Antes", selectPhotos: "Seleccionar", photosAfter: "Fotos Después", solutionDesc: "Solución",
-        closing: "Cierre", diagnosis: "Diagnóstico", finalNotes: "Notas", generateBtn: "Generar Reporte",
+        title: "Reporte de Servicio", clientLabel: "Cliente / Empresa", clientHelp: "* Presiona la Lupa o Enter para buscar.",
+        manualWebLabel: "No encontrado. ¿Subir manual?", location: "Locación (Sitio)", preparedBy: "Prepared By (Técnico)", 
+        revisedBy: "Revised By (Supervisor)", date: "Date (Fecha)", ticket: "Referencia / Ticket", visitDetails: "Detalles de Visita",
+        visitNo: "No. Visita", startTime: "Hora Entrada", endTime: "Hora Salida", layoutLabel: "Layout (Plano)", 
+        uploadLayout: "Subir Imagen", serviceDev: "Desarrollo del Servicio", problemDesc: "Descripción del Problema",
+        photosBefore: "Fotos 'Antes'", selectPhotos: "Seleccionar fotos", photosAfter: "Fotos 'Después'", 
+        solutionDesc: "Solución / Trabajo Realizado", closing: "Cierre", diagnosis: "Diagnóstico", finalNotes: "Notas Finales",
+        generateBtn: "Generar y Enviar Reporte",
+        // Placeholders
+        ph_client: "Ej: Coca Cola, Ford...", ph_location: "Dirección / Ciudad", ph_manual_name: "Escribe tu nombre",
+        ph_manual_email: "tucorreo@convergint.com", ph_ticket: "Escribe el ticket...", ph_problem: "¿Qué falla se reportó?",
+        ph_solution: "Describe la solución...", ph_diagnosis: "Conclusión técnica...", ph_notes: "Notas adicionales...",
+        ph_emails: "gerente@convergint.com...",
         // PPT
         ppt_title: "REPORTE DE SERVICIO", ppt_loc: "Locación:", ppt_client: "Cliente:", ppt_tech: "Técnico:", 
         ppt_sup: "Supervisor:", ppt_date: "Fecha:", ppt_ticket: "Ticket:", ppt_start: "Entrada:", ppt_end: "Salida:",
-        ppt_layout: "LAYOUT", ppt_prob_title: "PROBLEMA", ppt_evid_before: "ANTES", ppt_sol_title: "SOLUCIÓN", 
-        ppt_work_done: "Trabajo:", ppt_photos: "Fotos:", ppt_close_title: "CIERRE"
+        ppt_layout: "LAYOUT / UBICACIÓN", ppt_prob: "DESCRIPCIÓN DEL PROBLEMA", ppt_evid_before: "EVIDENCIA: ANTES", 
+        ppt_sol: "SOLUCIÓN / EVIDENCIA FINAL", ppt_work: "Trabajo Realizado:", ppt_photos: "Fotos:", ppt_close: "DIAGNÓSTICO Y CIERRE"
     },
     en: {
-        title: "Service Report", clientLabel: "Client / Company", clientHelp: "* Press Magnifier or Enter to search HD.",
-        manualWebLabel: "Not found. Upload manual?", location: "Location", preparedBy: "Technician", revisedBy: "Supervisor",
-        date: "Date", ticket: "Ticket", visitDetails: "Visit", visitNo: "Visit #", startTime: "In", endTime: "Out",
-        layoutLabel: "Layout", uploadLayout: "Upload Layout", serviceDev: "Development", problemDesc: "Problem",
-        photosBefore: "Photos Before", selectPhotos: "Select", photosAfter: "Photos After", solutionDesc: "Solution",
-        closing: "Closing", diagnosis: "Diagnosis", finalNotes: "Notes", generateBtn: "Generate Report",
+        title: "Service Report", clientLabel: "Client / Company", clientHelp: "* Press Magnifier or Enter to search.",
+        manualWebLabel: "Not found. Upload manual?", location: "Location (Site)", preparedBy: "Prepared By (Technician)", 
+        revisedBy: "Revised By (Supervisor)", date: "Date", ticket: "Reference / Ticket", visitDetails: "Visit Details",
+        visitNo: "Visit No.", startTime: "Start Time", endTime: "End Time", layoutLabel: "Layout (Blueprint)", 
+        uploadLayout: "Upload Image", serviceDev: "Service Development", problemDesc: "Problem Description",
+        photosBefore: "Photos 'Before'", selectPhotos: "Select photos", photosAfter: "Photos 'After'", 
+        solutionDesc: "Solution / Work Done", closing: "Closing", diagnosis: "Diagnosis", finalNotes: "Final Notes",
+        generateBtn: "Generate & Send Report",
+        // Placeholders
+        ph_client: "Ex: Coca Cola, Ford...", ph_location: "Address / City", ph_manual_name: "Your Name",
+        ph_manual_email: "email@convergint.com", ph_ticket: "Enter ticket...", ph_problem: "Reported issue?",
+        ph_solution: "Describe solution...", ph_diagnosis: "Technical conclusion...", ph_notes: "Additional notes...",
+        ph_emails: "manager@convergint.com...",
         // PPT
         ppt_title: "SERVICE REPORT", ppt_loc: "Location:", ppt_client: "Client:", ppt_tech: "Technician:", 
         ppt_sup: "Supervisor:", ppt_date: "Date:", ppt_ticket: "Ticket:", ppt_start: "Start:", ppt_end: "End:",
-        ppt_layout: "LAYOUT", ppt_prob_title: "PROBLEM", ppt_evid_before: "BEFORE", ppt_sol_title: "SOLUTION", 
-        ppt_work_done: "Work:", ppt_photos: "Photos:", ppt_close_title: "CLOSING"
+        ppt_layout: "LAYOUT / SITE MAP", ppt_prob: "PROBLEM DESCRIPTION", ppt_evid_before: "EVIDENCE: BEFORE", 
+        ppt_sol: "SOLUTION / FINAL EVIDENCE", ppt_work: "Work Performed:", ppt_photos: "Photos:", ppt_close: "DIAGNOSIS & CLOSING"
     },
     pt: {
-        title: "Relatório de Serviço", clientLabel: "Cliente / Empresa", clientHelp: "* Pressione Lupa ou Enter para buscar HD.",
-        manualWebLabel: "Não encontrado. Upload?", location: "Localização", preparedBy: "Técnico", revisedBy: "Supervisor",
-        date: "Data", ticket: "Ticket", visitDetails: "Visita", visitNo: "Nº Visita", startTime: "Entrada", endTime: "Saída",
-        layoutLabel: "Layout", uploadLayout: "Carregar Layout", serviceDev: "Desenvolvimento", problemDesc: "Problema",
-        photosBefore: "Fotos Antes", selectPhotos: "Selecionar", photosAfter: "Fotos Depois", solutionDesc: "Solução",
-        closing: "Fechamento", diagnosis: "Diagnóstico", finalNotes: "Notas", generateBtn: "Gerar Relatório",
+        title: "Relatório de Serviço", clientLabel: "Cliente / Empresa", clientHelp: "* Pressione Lupa ou Enter para buscar.",
+        manualWebLabel: "Não encontrado. Upload?", location: "Localização (Site)", preparedBy: "Preparado Por (Técnico)", 
+        revisedBy: "Revisado Por (Supervisor)", date: "Data", ticket: "Referência / Ticket", visitDetails: "Detalhes da Visita",
+        visitNo: "Nº da Visita", startTime: "Hora Entrada", endTime: "Hora Saída", layoutLabel: "Layout (Planta)", 
+        uploadLayout: "Carregar Imagem", serviceDev: "Desenvolvimento", problemDesc: "Descrição do Problema",
+        photosBefore: "Fotos 'Antes'", selectPhotos: "Selecionar fotos", photosAfter: "Fotos 'Depois'", 
+        solutionDesc: "Solução / Trabalho", closing: "Encerramento", diagnosis: "Diagnóstico", finalNotes: "Anotações Finais",
+        generateBtn: "Gerar e Enviar",
+        // Placeholders
+        ph_client: "Ex: Coca Cola, Ford...", ph_location: "Endereço / Cidade", ph_manual_name: "Seu Nome",
+        ph_manual_email: "email@convergint.com", ph_ticket: "Digite o ticket...", ph_problem: "Problema relatado?",
+        ph_solution: "Descreva a solução...", ph_diagnosis: "Conclusão técnica...", ph_notes: "Notas adicionais...",
+        ph_emails: "gerente@convergint.com...",
         // PPT
         ppt_title: "RELATÓRIO DE SERVIÇO", ppt_loc: "Localização:", ppt_client: "Cliente:", ppt_tech: "Técnico:", 
         ppt_sup: "Supervisor:", ppt_date: "Data:", ppt_ticket: "Ticket:", ppt_start: "Entrada:", ppt_end: "Saída:",
-        ppt_layout: "LAYOUT", ppt_prob_title: "PROBLEMA", ppt_evid_before: "ANTES", ppt_sol_title: "SOLUÇÃO", 
-        ppt_work_done: "Trabalho:", ppt_photos: "Fotos:", ppt_close_title: "ENCERRAMENTO"
+        ppt_layout: "LAYOUT / PLANTA", ppt_prob: "DESCRIÇÃO DO PROBLEMA", ppt_evid_before: "EVIDÊNCIA: ANTES", 
+        ppt_sol: "SOLUÇÃO / EVIDÊNCIA FINAL", ppt_work: "Trabalho Realizado:", ppt_photos: "Fotos:", ppt_close: "DIAGNÓSTICO E ENCERRAMENTO"
     }
 };
 
@@ -56,7 +77,7 @@ const staffDirectory = {
 };
 
 // ==========================================
-// 2. FUNCIONES PRINCIPALES (Login)
+// 2. FUNCIONES PRINCIPALES
 // ==========================================
 function checkLogin() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -76,24 +97,18 @@ function checkLogin() {
     }
 }
 
-// ==========================================
-// 3. INICIALIZACIÓN
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Login
     const loginInput = document.getElementById('loginEmail');
     if(loginInput) loginInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkLogin(); });
     
-    // Previews
     safeSetupPreview('imgLayout', null);
     safeSetupPreview('fotosAntes', 'previewAntes');
     safeSetupPreview('fotosDespues', 'previewDespues');
     
-    // Idioma
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.addEventListener('change', (e) => changeLanguage(e.target.value));
 
-    // --- SISTEMA DE LOGOS ---
+    // LOGOS
     const btnBuscar = document.getElementById('btnBuscarLogo');
     const inputCliente = document.getElementById('cliente');
     const inputLogoManual = document.getElementById('inputLogoManual');
@@ -101,12 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (inputCliente) {
         inputCliente.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') { e.preventDefault(); buscarLogoPremium(); }
+            if (e.key === 'Enter') { e.preventDefault(); buscarLogoMaster(); }
         });
     }
-    if (btnBuscar) btnBuscar.addEventListener('click', buscarLogoPremium);
+    if (btnBuscar) btnBuscar.addEventListener('click', buscarLogoMaster);
 
-    // Carga Manual (Guarda en Memoria)
     if(inputLogoManual) {
         inputLogoManual.addEventListener('change', function() {
             if (this.files && this.files[0]) {
@@ -114,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 reader.onload = (e) => {
                     const base64 = e.target.result;
                     mostrarLogoEnPantalla(base64);
-                    // Guardar para el futuro
                     const name = inputCliente.value.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
                     if(name) localStorage.setItem('logo_hd_' + name, base64);
                 };
@@ -125,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(btnReset) btnReset.addEventListener('click', resetearLogoUI);
 
-    // Técnico Manual
     const selectTecnico = document.getElementById('nombreSelect');
     const divManual = document.getElementById('manualTechnicianInput');
     if(selectTecnico && divManual) {
@@ -142,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Submit
     const form = document.getElementById('serviceForm');
     if (form) form.addEventListener('submit', async (e) => { e.preventDefault(); await generatePowerPoint(); });
 });
@@ -150,16 +161,24 @@ document.addEventListener('DOMContentLoaded', () => {
 function changeLanguage(lang) {
     const texts = translations[lang];
     if(!texts) return;
+    
+    // Texto Normal
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (texts[key]) el.innerText = texts[key];
     });
+
+    // Placeholders (Texto gris)
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (texts[key]) el.placeholder = texts[key];
+    });
 }
 
-// ==========================================
-// 4. ALGORITMO DE BÚSQUEDA DE LOGOS
-// ==========================================
-async function buscarLogoPremium() {
+// =========================================================
+// 4. MOTOR DE BÚSQUEDA MAESTRO
+// =========================================================
+async function buscarLogoMaster() {
     const input = document.getElementById('cliente');
     const query = input.value.trim();
     if (query.length < 2) return;
@@ -171,94 +190,69 @@ async function buscarLogoPremium() {
     placeholder.style.display = 'none';
     document.getElementById('manualUploadArea').style.display = 'none';
 
-    // 1. MEMORIA: ¿Ya lo buscamos o subimos antes?
     const cleanKey = query.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    // 1. MEMORIA LOCAL
     const memoria = localStorage.getItem('logo_hd_' + cleanKey);
     if (memoria) {
         mostrarLogoEnPantalla(memoria);
         return;
     }
 
-    // 2. INTERNET: Apple -> Clearbit
-    try {
-        // Apple iTunes
-        try {
-            const appleUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=software&limit=1`;
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(appleUrl)}`;
-            const response = await fetch(proxyUrl);
-            const data = await response.json();
-            const json = JSON.parse(data.contents);
-            if (json.resultCount > 0 && json.results[0].artworkUrl512) {
-                await validarYMostrarImagen(json.results[0].artworkUrl512, cleanKey);
-                return;
-            }
-        } catch (e) {}
+    // 2. DICCIONARIO
+    const brandMap = {
+        "coca": "coca-cola.com", "cocacola": "coca-cola.com", "coca-cola": "coca-cola.com",
+        "fedex": "fedex.com", "federalexpress": "fedex.com",
+        "pepsi": "pepsi.com", "ford": "ford.com", "dhl": "dhl.com",
+        "hp": "hp.com", "bimbo": "grupobimbo.com", "grupobimbo": "grupobimbo.com",
+        "cemex": "cemex.com", "walmart": "walmart.com", "oxxo": "oxxo.com",
+        "soriana": "soriana.com", "liverpool": "liverpool.com.mx",
+        "coppel": "coppel.com", "telmex": "telmex.com", "cfe": "cfe.mx", "pemex": "pemex.com"
+    };
 
-        // Clearbit
-        try {
-            const clearbitUrl = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${encodeURIComponent(query)}`;
-            const resp = await fetch(clearbitUrl);
-            const data = await resp.json();
-            if (data && data.length > 0 && data[0].logo) {
-                await validarYMostrarImagen(data[0].logo, cleanKey);
-                return;
-            }
-        } catch (e) {}
-
-        // Google (Intenta varios dominios)
-        const domains = [
-            query.toLowerCase().replace(/\s+/g, '') + ".com",
-            query.toLowerCase().replace(/\s+/g, '-') + ".com",
-            query.toLowerCase().replace(/\s+/g, '') + ".com.mx"
-        ];
-        await intentarGoogleSecuencial(domains, 0, cleanKey);
-
-    } catch (error) {
-        buscarEnCarpetaLocal(cleanKey); // Si falla internet, busca en carpeta
+    let candidates = [];
+    if (brandMap[cleanKey]) {
+        candidates.push(brandMap[cleanKey]);
     }
-}
 
-function intentarGoogleSecuencial(domains, index, cleanKey) {
-    if (index >= domains.length) {
-        buscarEnCarpetaLocal(cleanKey); // Falló Google, vamos a la carpeta
-        return;
-    }
-    const domain = domains[index];
-    const url = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    candidates.push(query.toLowerCase().replace(/\s+/g, '') + ".com");       
+    candidates.push(query.toLowerCase().replace(/\s+/g, '-') + ".com");      
+    candidates.push(cleanKey + ".com");                                      
+    candidates.push(cleanKey + ".com.mx");                                   
     
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.onload = function() { mostrarLogoEnPantalla(url); }; // Google casi siempre devuelve imagen (aunque sea un mundo)
-    img.onerror = function() { intentarGoogleSecuencial(domains, index + 1, cleanKey); };
-    img.src = url;
+    candidates = [...new Set(candidates)];
+
+    // 3. INTENTAR INTERNET
+    const encontrado = await intentarListaGoogle(candidates, cleanKey);
+
+    if (encontrado) return;
+
+    // 4. INTENTAR CARPETA LOCAL (GITHUB)
+    const localPath = `logos/${cleanKey}.png`;
+    const imgLocal = new Image();
+    imgLocal.onload = function() { mostrarLogoEnPantalla(localPath); };
+    imgLocal.onerror = function() { mostrarErrorLogo(); };
+    imgLocal.src = localPath;
 }
 
-// 3. CARPETA LOCAL (Fallback)
-function buscarEnCarpetaLocal(cleanKey) {
-    // Intenta cargar desde la carpeta 'logos/'
-    const localPath = `logos/${cleanKey}.png`; 
-    const img = new Image();
-    img.onload = function() {
-        mostrarLogoEnPantalla(localPath);
-    };
-    img.onerror = function() {
-        // Falló todo: Mostrar opción manual
-        mostrarErrorLogo();
-    };
-    img.src = localPath;
-}
-
-function validarYMostrarImagen(url, saveKey) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.onload = () => {
-            mostrarLogoEnPantalla(url);
-            localStorage.setItem('logo_hd_' + saveKey, url);
-            resolve();
-        };
-        img.onerror = () => { reject(); };
-        img.src = url;
+function intentarListaGoogle(domains, cleanKey) {
+    return new Promise((resolve) => {
+        let index = 0;
+        function probarSiguiente() {
+            if (index >= domains.length) { resolve(false); return; }
+            const domain = domains[index];
+            const url = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.onload = function() {
+                mostrarLogoEnPantalla(url);
+                localStorage.setItem('logo_hd_' + cleanKey, url);
+                resolve(true);
+            };
+            img.onerror = function() { index++; probarSiguiente(); };
+            img.src = url;
+        }
+        probarSiguiente();
     });
 }
 
@@ -269,38 +263,31 @@ function mostrarLogoEnPantalla(src) {
     const resetBtn = document.getElementById('btnResetLogo');
     const manualBox = document.getElementById('manualUploadArea');
 
-    if(spinner) spinner.style.display = 'none';
-    if(placeholder) placeholder.style.display = 'none';
-    if(manualBox) manualBox.style.display = 'none';
-    
-    if(img) {
-        img.src = src;
-        img.style.display = 'block';
-    }
-    if(resetBtn) resetBtn.style.display = 'block';
+    spinner.style.display = 'none';
+    placeholder.style.display = 'none';
+    manualBox.style.display = 'none';
+    img.src = src;
+    img.style.display = 'block';
+    resetBtn.style.display = 'block';
 }
 
 function mostrarErrorLogo() {
     const spinner = document.getElementById('logoSpinner');
     const placeholder = document.getElementById('logoPlaceholder');
     const manualBox = document.getElementById('manualUploadArea');
-
-    if(spinner) spinner.style.display = 'none';
-    if(placeholder) {
-        placeholder.style.display = 'flex';
-        placeholder.innerHTML = "NO<br>LOGO";
-    }
-    if(manualBox) manualBox.style.display = 'block';
+    spinner.style.display = 'none';
+    placeholder.style.display = 'flex';
+    placeholder.innerHTML = "NO<br>LOGO";
+    manualBox.style.display = 'block';
 }
 
 function resetearLogoUI() {
     const img = document.getElementById('logoVisual');
     const placeholder = document.getElementById('logoPlaceholder');
     const resetBtn = document.getElementById('btnResetLogo');
-    
-    if(img) { img.style.display = 'none'; img.src = ''; }
-    if(placeholder) { placeholder.style.display = 'flex'; placeholder.innerHTML = "SIN<br>LOGO"; }
-    if(resetBtn) resetBtn.style.display = 'none';
+    img.style.display = 'none'; img.src = '';
+    placeholder.style.display = 'flex'; placeholder.innerHTML = "SIN<br>LOGO";
+    resetBtn.style.display = 'none';
 }
 
 // ==========================================
@@ -327,7 +314,7 @@ async function generatePowerPoint() {
     try {
         const data = getFormData();
         
-        // --- FASE DE TRADUCCIÓN ---
+        // TRADUCIR CONTENIDO DEL TÉCNICO
         const [descP, descS, diag, notes] = await Promise.all([
             translateText(data.descripcionProblema, lang),
             translateText(data.descDespues, lang),
@@ -372,7 +359,7 @@ async function generatePowerPoint() {
         };
         row(t.ppt_loc, data.ubicacion, 0); row(t.ppt_client, data.cliente, 1);
         row(t.ppt_tech, data.nombre, 2); row(t.ppt_sup, data.revisadoPor, 3);
-        row(t.ppt_date, data.fecha, 4); row(t.ppt_ticket, data.ticket, 5);
+        row(t.ppt_date, formatDate(data.fecha), 4); row(t.ppt_ticket, data.ticket, 5);
         row(t.ppt_start, data.horarioinicio, 6); row(t.ppt_end, data.horariofinal, 7);
 
         if(logoClient) {
@@ -380,26 +367,29 @@ async function generatePowerPoint() {
             s1.addImage({data:logoClient, x:7.3, y:2.3, w:2.3, h:2.3, sizing:{type:'contain'}});
         }
 
-        // SLIDES DE CONTENIDO (TRADUCIDOS)
-        const addContentSlide = (title, text, imgs) => {
-            const s = pptx.addSlide({ masterName:'MASTER' });
-            s.addText(title, {x:0.5, y:0.25, fontSize:18, color:C_WHT, bold:true});
-            s.addShape(pptx.ShapeType.rect, {x:0.5, y:1.2, w:9, h:3.5, fill:'FAFAFA', line:{color:C_BLUE, width:2}});
-            if(text) s.addText(text, {x:0.6, y:1.3, w:8.8, h:3.3, fontSize:14, color:'000000', valign:'top'});
-            if(imgs) addPhotosToSlide(s, imgs);
-        };
-
+        // SLIDE 2: LAYOUT
         if(data.imgLayout) {
             const s = pptx.addSlide({masterName:'MASTER'});
             s.addText(t.ppt_layout, {x:0.5, y:1, fontSize:18, color:C_WHT});
-            s.addImage({data:await getBase64FromFile(data.imgLayout), x:0.5, y:1.2, w:9, h:3.5, sizing:{type:'contain'}});
+            try { s.addImage({data:await getBase64FromFile(data.imgLayout), x:0.5, y:1.2, w:9, h:3.5, sizing:{type:'contain'}}); } catch(e){}
         }
 
-        addContentSlide(t.ppt_prob_title, descP, data.fotosAntes);
-        
+        // SLIDE 3: PROBLEMA
+        const s3 = pptx.addSlide({masterName:'MASTER'});
+        s3.addText(t.ppt_prob, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
+        s3.addShape(pptx.ShapeType.rect, {x:0.5, y:1.2, w:9, h:3.5, fill:'FAFAFA', line:{color:C_BLUE}});
+        s3.addText(descP || '-', {x:0.6, y:1.3, w:8.8, h:3.3, fontSize:14, color:'000000', valign:'top'});
+
+        // SLIDE 4: ANTES
+        if(data.fotosAntes.length) {
+            const s = pptx.addSlide({masterName:'MASTER'}); s.addText(t.ppt_evid_before, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
+            await addPhotosToSlide(s, data.fotosAntes);
+        }
+
+        // SLIDE 5: DESPUÉS
         const sSol = pptx.addSlide({masterName:'MASTER'});
-        sSol.addText(t.ppt_sol_title, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
-        sSol.addText(t.ppt_work_done, {x:0.5, y:1, fontSize:12, bold:true, color:'595959'});
+        sSol.addText(t.ppt_sol, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
+        sSol.addText(t.ppt_work, {x:0.5, y:1, fontSize:12, bold:true, color:'595959'});
         sSol.addShape(pptx.ShapeType.rect, {x:0.5, y:1.3, w:9, h:1, fill:'F0F7FF', line:{color:C_BLUE}});
         sSol.addText(descS || '-', {x:0.6, y:1.35, w:8.8, h:0.9, fontSize:12, color:'000000', valign:'top'});
         if(data.fotosDespues.length) {
@@ -407,9 +397,15 @@ async function generatePowerPoint() {
              await addPhotosToSlide(sSol, data.fotosDespues, 2.8);
         }
 
-        addContentSlide(t.ppt_close_title, `${diag || ''}\n\n${notes || ''}`);
+        // SLIDE 6: CIERRE
+        const s6 = pptx.addSlide({masterName:'MASTER'});
+        s6.addText(t.ppt_close, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
+        s6.addShape(pptx.ShapeType.rect, {x:0.5, y:1.2, w:9, h:3.5, fill:'FFFFFF', line:{color:C_BLUE}});
+        s6.addText((diag || "") + "\n\n" + (notes || ""), {x:0.6, y:1.3, w:8.8, h:3.3, fontSize:14, color:'000000', valign:'top'});
 
-        const fname = `Reporte_${data.cliente}_${data.ticket}.pptx`;
+        // DOWNLOAD
+        const safeClient = (data.cliente || 'Client').replace(/[^a-z0-9]/gi, '_');
+        const fname = `Reporte_${safeClient}_${data.ticket}.pptx`;
         await pptx.writeFile({ fileName: fname });
         
         const b64 = await pptx.write('base64');
