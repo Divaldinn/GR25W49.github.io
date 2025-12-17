@@ -4,7 +4,7 @@
 const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
 
 // ==========================================
-// 1. DICCIONARIO DE IDIOMAS (CON PLACEHOLDERS)
+// 1. DICCIONARIO DE IDIOMAS
 // ==========================================
 const translations = {
     es: {
@@ -77,26 +77,48 @@ const staffDirectory = {
 };
 
 // ==========================================
-// 2. FUNCIONES PRINCIPALES
+// 2. MAPA & LOGIN
 // ==========================================
+let map; 
+
+function initMap() {
+    // Mapa centrado en CDMX por defecto
+    map = L.map('miniMapContainer').setView([19.4326, -99.1332], 13);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let marker = L.marker([19.4326, -99.1332], {draggable: true}).addTo(map);
+
+    // Intentar geolocalizar al usuario
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            map.setView([lat, lng], 15);
+            marker.setLatLng([lat, lng]);
+        });
+    }
+}
+
 function checkLogin() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     if (email.endsWith('@convergint.com')) {
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainApp').style.display = 'block';
-        const sel = document.getElementById('nombreSelect');
-        const manEmail = document.getElementById('emailManual');
-        let found = false;
-        for (const [name, mail] of Object.entries(staffDirectory)) {
-            if (mail.toLowerCase() === email) { sel.value = name; sel.dispatchEvent(new Event('change')); found = true; break; }
-        }
-        if(!found) { sel.value = 'Otro'; sel.dispatchEvent(new Event('change')); if(manEmail) manEmail.value = email; }
+        
+        // Iniciar mapa (requiere que el div sea visible)
+        setTimeout(initMap, 500); 
     } else {
         const err = document.getElementById('loginError');
         if(err) err.style.display = 'block';
     }
 }
 
+// ==========================================
+// 3. INICIALIZACIÓN
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const loginInput = document.getElementById('loginEmail');
     if(loginInput) loginInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkLogin(); });
@@ -108,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.addEventListener('change', (e) => changeLanguage(e.target.value));
 
-    // LOGOS
     const btnBuscar = document.getElementById('btnBuscarLogo');
     const inputCliente = document.getElementById('cliente');
     const inputLogoManual = document.getElementById('inputLogoManual');
@@ -138,22 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(btnReset) btnReset.addEventListener('click', resetearLogoUI);
 
-    const selectTecnico = document.getElementById('nombreSelect');
-    const divManual = document.getElementById('manualTechnicianInput');
-    if(selectTecnico && divManual) {
-        selectTecnico.addEventListener('change', function() {
-            if (this.value === 'Otro') {
-                divManual.style.display = 'block';
-                document.getElementById('nombreManual').required = true;
-                document.getElementById('emailManual').required = true;
-            } else {
-                divManual.style.display = 'none';
-                document.getElementById('nombreManual').required = false;
-                document.getElementById('emailManual').required = false;
-            }
-        });
-    }
-
     const form = document.getElementById('serviceForm');
     if (form) form.addEventListener('submit', async (e) => { e.preventDefault(); await generatePowerPoint(); });
 });
@@ -162,13 +167,11 @@ function changeLanguage(lang) {
     const texts = translations[lang];
     if(!texts) return;
     
-    // Texto Normal
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (texts[key]) el.innerText = texts[key];
     });
 
-    // Placeholders (Texto gris)
     document.querySelectorAll('[data-i18n-ph]').forEach(el => {
         const key = el.getAttribute('data-i18n-ph');
         if (texts[key]) el.placeholder = texts[key];
@@ -367,26 +370,26 @@ async function generatePowerPoint() {
             s1.addImage({data:logoClient, x:7.3, y:2.3, w:2.3, h:2.3, sizing:{type:'contain'}});
         }
 
-        // SLIDE 2: LAYOUT
+        // SLIDE 2
         if(data.imgLayout) {
             const s = pptx.addSlide({masterName:'MASTER'});
             s.addText(t.ppt_layout, {x:0.5, y:1, fontSize:18, color:C_WHT});
             try { s.addImage({data:await getBase64FromFile(data.imgLayout), x:0.5, y:1.2, w:9, h:3.5, sizing:{type:'contain'}}); } catch(e){}
         }
 
-        // SLIDE 3: PROBLEMA
+        // SLIDE 3
         const s3 = pptx.addSlide({masterName:'MASTER'});
         s3.addText(t.ppt_prob, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
         s3.addShape(pptx.ShapeType.rect, {x:0.5, y:1.2, w:9, h:3.5, fill:'FAFAFA', line:{color:C_BLUE}});
         s3.addText(descP || '-', {x:0.6, y:1.3, w:8.8, h:3.3, fontSize:14, color:'000000', valign:'top'});
 
-        // SLIDE 4: ANTES
+        // SLIDE 4
         if(data.fotosAntes.length) {
             const s = pptx.addSlide({masterName:'MASTER'}); s.addText(t.ppt_evid_before, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
             await addPhotosToSlide(s, data.fotosAntes);
         }
 
-        // SLIDE 5: DESPUÉS
+        // SLIDE 5
         const sSol = pptx.addSlide({masterName:'MASTER'});
         sSol.addText(t.ppt_sol, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
         sSol.addText(t.ppt_work, {x:0.5, y:1, fontSize:12, bold:true, color:'595959'});
@@ -397,7 +400,7 @@ async function generatePowerPoint() {
              await addPhotosToSlide(sSol, data.fotosDespues, 2.8);
         }
 
-        // SLIDE 6: CIERRE
+        // SLIDE 6
         const s6 = pptx.addSlide({masterName:'MASTER'});
         s6.addText(t.ppt_close, {x:0.5, y:0.25, fontSize:18, color:C_WHT});
         s6.addShape(pptx.ShapeType.rect, {x:0.5, y:1.2, w:9, h:3.5, fill:'FFFFFF', line:{color:C_BLUE}});
@@ -443,17 +446,24 @@ function getFormData() {
     const val = id => document.getElementById(id)?.value || "";
     const files = id => document.getElementById(id)?.files || [];
     
-    const selName = val('nombreSelect');
-    const selSup = val('revisadoPor');
+    // Técnico es siempre manual ahora
+    const nombreTec = val('nombreManual');
+    
+    // Asumimos un email por defecto o lo pedimos? 
+    // Como el input de nombre es libre, el correo técnico es el manual o null
+    // Usaremos el email manual del técnico
+    // NOTA: Si quieres pedir email técnico, deberíamos agregar un input. 
+    // Por ahora, lo dejaré vacío o podrías agregar un campo más. 
+    // O mejor, usar el correo de login si coincide. 
     
     return {
         cliente: val('cliente'), ubicacion: val('ubicacion'), ticket: val('ticket'),
         fecha: val('fecha'), horarioinicio: val('horarioinicio'), horariofinal: val('horariofinal'),
         descripcionProblema: val('descripcionProblema'), descDespues: val('descDespues'),
         diagnostico: val('diagnostico'), resumen: val('resumen'), correosExtras: val('correoDestino'),
-        nombre: selName === 'Otro' ? val('nombreManual') : selName,
-        emailTecnico: selName === 'Otro' ? val('emailManual') : staffDirectory[selName],
-        revisadoPor: selSup, emailSupervisor: staffDirectory[selSup],
+        nombre: nombreTec,
+        emailTecnico: "", // Aquí podrías poner document.getElementById('loginEmail').value si quieres
+        revisadoPor: val('revisadoPor'), emailSupervisor: staffDirectory[val('revisadoPor')],
         imgLayout: files('imgLayout')[0], fotosAntes: files('fotosAntes'), fotosDespues: files('fotosDespues')
     };
 }
