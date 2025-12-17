@@ -1,27 +1,27 @@
 // ==========================================
-// CONFIGURACIÓN DEL SERVIDOR (BACKEND)
+// CONFIGURACIÓN DEL SERVIDOR
 // ==========================================
 const BACKEND_URL = "https://gr25w49-github-io.onrender.com/enviar-ppt";
 
 // ==========================================
-// 1. DICCIONARIO DE TRADUCCIONES (COMPLETO)
+// 1. DICCIONARIO DE TRADUCCIONES
 // ==========================================
 const translations = {
     es: {
-        // UI HTML
+        // UI
         title: "Reporte de Servicio", subtitle: "Generador Automatizado", projectInfo: "Información del Proyecto",
-        clientLabel: "Nombre del Cliente / Empresa", clientHelp: "* Escribe el nombre y presiona ENTER.",
-        manualWebLabel: "No encontramos el logo. ¿Cuál es su web?", location: "Locación (Sitio)",
-        preparedBy: "Prepared By (Técnico)", revisedBy: "Revised By (Supervisor)",
-        date: "Date (Fecha)", ticket: "Referencia / Ticket", visitDetails: "Detalles de Visita",
-        visitNo: "No. Visita", startTime: "Hora Entrada", endTime: "Hora Salida",
-        layoutLabel: "Layout (Plano/Esquema)", uploadLayout: "Subir Imagen del Layout",
-        serviceDev: "Desarrollo del Servicio", problemDesc: "Descripción del Problema",
-        photosBefore: "Fotos 'Antes' (Evidencia inicial)", selectPhotos: "Seleccionar fotos",
-        photosAfter: "Fotos 'Después' (Solución)", solutionDesc: "Solución / Trabajo Realizado",
-        closing: "Cierre", diagnosis: "Diagnóstico", finalNotes: "Anotaciones Finales",
-        generateBtn: "Generar y Enviar Reporte",
-        // ETIQUETAS PPT (NUEVO)
+        clientLabel: "Cliente / Empresa", clientHelp: "* Escribe el nombre y presiona ENTER.",
+        manualWebLabel: "¿Web del cliente?", location: "Locación",
+        preparedBy: "Técnico", revisedBy: "Supervisor",
+        date: "Fecha", ticket: "Ticket / Referencia", visitDetails: "Visita & Tiempos",
+        visitNo: "# Visita", startTime: "Entrada", endTime: "Salida",
+        layoutLabel: "Layout", uploadLayout: "Subir Imagen",
+        serviceDev: "Desarrollo", problemDesc: "Problema Reportado",
+        photosBefore: "Evidencia Inicial (Antes)", selectPhotos: "Añadir Fotos",
+        photosAfter: "Evidencia Final (Después)", solutionDesc: "Solución Aplicada",
+        closing: "Cierre Técnico", diagnosis: "Diagnóstico Final", finalNotes: "Notas Adicionales",
+        generateBtn: "Generar Reporte",
+        // PPT
         ppt_title: "REPORTE DE SERVICIO",
         ppt_loc: "Locación:", ppt_client: "Cliente:", ppt_tech: "Técnico:", ppt_sup: "Supervisor:",
         ppt_date: "Fecha:", ppt_ticket: "Ticket:", ppt_start: "Hora Entrada:", ppt_end: "Hora Salida:",
@@ -34,20 +34,20 @@ const translations = {
         ppt_close_title: "DIAGNÓSTICO Y CIERRE"
     },
     en: {
-        // UI HTML
+        // UI
         title: "Service Report", subtitle: "Automated Generator", projectInfo: "Project Information",
-        clientLabel: "Client / Company Name", clientHelp: "* Type name and press ENTER.",
-        manualWebLabel: "Logo not found. Website?", location: "Location (Site)",
-        preparedBy: "Prepared By (Technician)", revisedBy: "Revised By (Supervisor)",
-        date: "Date", ticket: "Reference / Ticket", visitDetails: "Visit Details",
-        visitNo: "Visit No.", startTime: "Start Time", endTime: "End Time",
-        layoutLabel: "Layout (Blueprint)", uploadLayout: "Upload Layout Image",
-        serviceDev: "Service Development", problemDesc: "Problem Description",
-        photosBefore: "Photos 'Before'", selectPhotos: "Select photos",
-        photosAfter: "Photos 'After'", solutionDesc: "Solution / Work Done",
-        closing: "Closing", diagnosis: "Diagnosis", finalNotes: "Final Notes",
-        generateBtn: "Generate & Send Report",
-        // ETIQUETAS PPT (NUEVO)
+        clientLabel: "Client / Company", clientHelp: "* Type name and press ENTER.",
+        manualWebLabel: "Client Website?", location: "Location",
+        preparedBy: "Technician", revisedBy: "Supervisor",
+        date: "Date", ticket: "Ticket / Ref", visitDetails: "Visit & Timing",
+        visitNo: "Visit #", startTime: "Start Time", endTime: "End Time",
+        layoutLabel: "Layout", uploadLayout: "Upload Image",
+        serviceDev: "Development", problemDesc: "Reported Problem",
+        photosBefore: "Initial Evidence (Before)", selectPhotos: "Add Photos",
+        photosAfter: "Final Evidence (After)", solutionDesc: "Applied Solution",
+        closing: "Technical Closing", diagnosis: "Final Diagnosis", finalNotes: "Additional Notes",
+        generateBtn: "Generate Report",
+        // PPT
         ppt_title: "SERVICE REPORT",
         ppt_loc: "Location:", ppt_client: "Client:", ppt_tech: "Technician:", ppt_sup: "Supervisor:",
         ppt_date: "Date:", ppt_ticket: "Ticket:", ppt_start: "Start Time:", ppt_end: "End Time:",
@@ -60,20 +60,20 @@ const translations = {
         ppt_close_title: "DIAGNOSIS & CLOSING"
     },
     pt: {
-        // UI HTML
+        // UI
         title: "Relatório de Serviço", subtitle: "Gerador Automatizado", projectInfo: "Informações do Projeto",
-        clientLabel: "Nome do Cliente / Empresa", clientHelp: "* Digite o nome e pressione ENTER.",
-        manualWebLabel: "Logotipo não encontrado. Site?", location: "Localização (Site)",
-        preparedBy: "Preparado Por (Técnico)", revisedBy: "Revisado Por (Supervisor)",
-        date: "Data", ticket: "Referência / Ticket", visitDetails: "Detalhes da Visita",
-        visitNo: "Nº da Visita", startTime: "Hora Entrada", endTime: "Hora Saída",
-        layoutLabel: "Layout (Planta)", uploadLayout: "Carregar Imagem do Layout",
-        serviceDev: "Desenvolvimento", problemDesc: "Descrição do Problema",
-        photosBefore: "Fotos 'Antes'", selectPhotos: "Selecionar fotos",
-        photosAfter: "Fotos 'Depois'", solutionDesc: "Solução / Trabalho",
-        closing: "Encerramento", diagnosis: "Diagnóstico", finalNotes: "Anotações Finais",
-        generateBtn: "Gerar e Enviar",
-        // ETIQUETAS PPT (NUEVO)
+        clientLabel: "Cliente / Empresa", clientHelp: "* Digite o nome e pressione ENTER.",
+        manualWebLabel: "Site do Cliente?", location: "Localização",
+        preparedBy: "Técnico", revisedBy: "Supervisor",
+        date: "Data", ticket: "Ticket / Ref", visitDetails: "Visita & Horários",
+        visitNo: "Nº Visita", startTime: "Entrada", endTime: "Saída",
+        layoutLabel: "Layout", uploadLayout: "Carregar Imagem",
+        serviceDev: "Desenvolvimento", problemDesc: "Problema Relatado",
+        photosBefore: "Evidência Inicial (Antes)", selectPhotos: "Adicionar Fotos",
+        photosAfter: "Evidência Final (Depois)", solutionDesc: "Solução Aplicada",
+        closing: "Encerramento Técnico", diagnosis: "Diagnóstico Final", finalNotes: "Notas Adicionais",
+        generateBtn: "Gerar Relatório",
+        // PPT
         ppt_title: "RELATÓRIO DE SERVIÇO",
         ppt_loc: "Localização:", ppt_client: "Cliente:", ppt_tech: "Técnico:", ppt_sup: "Supervisor:",
         ppt_date: "Data:", ppt_ticket: "Ticket:", ppt_start: "Entrada:", ppt_end: "Saída:",
@@ -87,9 +87,6 @@ const translations = {
     }
 };
 
-// ==========================================
-// 2. DIRECTORIO
-// ==========================================
 const staffDirectory = {
     "Saul Ramirez": "saul.ramirez@convergint.com",
     "Gustavo Aburto": "gustavo.aburto@convergint.com",
@@ -98,7 +95,7 @@ const staffDirectory = {
 };
 
 // ==========================================
-// 3. LOGIN Y EVENTOS PRINCIPALES
+// 2. LÓGICA DE INICIO Y EVENTOS
 // ==========================================
 function checkLogin() {
     const emailInput = document.getElementById('loginEmail');
@@ -110,11 +107,10 @@ function checkLogin() {
     if (email.endsWith('@convergint.com')) {
         loginOverlay.style.display = 'none';
         mainApp.style.display = 'block';
-
+        // Auto-llenar datos si es posible
         const nombreSelect = document.getElementById('nombreSelect');
         const emailManual = document.getElementById('emailManual');
         let encontrado = false;
-
         for (const [nombre, emailStaff] of Object.entries(staffDirectory)) {
             if (emailStaff.toLowerCase() === email) {
                 nombreSelect.value = nombre;
@@ -139,68 +135,81 @@ function checkLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Login
+    // Login Enter
     const loginEmailInput = document.getElementById('loginEmail');
     if(loginEmailInput) loginEmailInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkLogin(); });
 
-    // 2. Configurar previews
+    // Previews
     safeSetupPreview('imgLayout', null);
     safeSetupPreview('fotosAntes', 'previewAntes');
     safeSetupPreview('fotosDespues', 'previewDespues');
 
-    // 3. Idioma
+    // Idioma
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.addEventListener('change', (e) => changeLanguage(e.target.value));
 
-    // 4. LÓGICA DEL LOGO CLIENTE (CON TU ARREGLO)
+    // LOGOS: Lógica Mejorada con Diccionario
     const inputCliente = document.getElementById('cliente');
+    const inputWebManual = document.getElementById('webManual');
     
+    // --- DICCIONARIO DE MARCAS CONOCIDAS ---
+    const brandMap = {
+        "fedex": "fedex.com",
+        "coca": "coca-cola.com",
+        "cocacola": "coca-cola.com",
+        "coca-cola": "coca-cola.com",
+        "ford": "ford.com",
+        "pepsi": "pepsi.com",
+        "dhl": "dhl.com",
+        "amazon": "amazon.com",
+        "google": "google.com",
+        "microsoft": "microsoft.com",
+        "convergint": "convergint.com",
+        "tesla": "tesla.com",
+        "walmart": "walmart.com"
+    };
+
     const iniciarBusquedaLogo = () => {
         const clientName = inputCliente.value.trim();
         if (clientName.length < 2) return;
 
-        const clean = clientName
-            .toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            .replace(/&/g, 'and')
-            .replace(/[^a-z0-9 ]/g, '')
-            .trim();
+        // Limpieza del nombre
+        const clean = clientName.toLowerCase().replace(/[^a-z0-9\-]/g, ''); // solo letras y numeros
 
+        // 1. ¿Está en el diccionario?
+        if (brandMap[clean]) {
+            tryDomainsSequentially([brandMap[clean]]);
+            return;
+        }
+
+        // 2. Si no, intentamos adivinar
         const candidates = [
-            clean.replace(/\s+/g, '') + '.com',       // cocacola.com
-            clean.replace(/\s+/g, '-') + '.com',      // coca-cola.com
-            clean.split(' ')[0] + '.com',             // coca.com
-            clean.replace(/\s+/g, '') + '.com.mx'     // cocacola.com.mx
+            clean + '.com',
+            clean + '.com.mx',
+            clientName.replace(/\s+/g, '') + '.com'
         ];
 
-        // Ocultar manual input
-        const manualDiv = document.getElementById('manualWebInput');
-        if(manualDiv) manualDiv.style.display = 'none';
-        const placeholder = document.getElementById('logoPlaceholder');
-        if(placeholder) placeholder.style.display = 'none';
-
+        // Reset UI
+        document.getElementById('manualWebInput').style.display = 'none';
+        document.getElementById('logoPlaceholder').style.display = 'none';
+        
         tryDomainsSequentially(candidates);
     };
 
     if (inputCliente) {
         inputCliente.addEventListener('blur', iniciarBusquedaLogo);
         inputCliente.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                iniciarBusquedaLogo();
-            }
+            if (e.key === 'Enter') { e.preventDefault(); iniciarBusquedaLogo(); }
         });
     }
 
-    // 5. Input Manual (Web)
-    const inputWebManual = document.getElementById('webManual');
     if (inputWebManual) {
         inputWebManual.addEventListener('blur', () => {
             if(inputWebManual.value) tryDomainsSequentially([inputWebManual.value]);
         });
     }
 
-    // 6. Selector Técnico
+    // Técnico Manual
     const selectTecnico = document.getElementById('nombreSelect');
     const divManual = document.getElementById('manualTechnicianInput');
     if(selectTecnico && divManual) {
@@ -217,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Submit
+    // Submit
     const form = document.getElementById('serviceForm');
     if (form) {
         form.addEventListener('submit', async (e) => {
@@ -238,9 +247,10 @@ function changeLanguage(lang) {
 }
 
 // ==========================================
-// 4. FUNCIONES DE LOGO (Secuencial)
+// 3. BUSCADOR DE LOGOS
 // ==========================================
 function tryDomainsSequentially(domains, index = 0) {
+    // Si fallan todos
     if (index >= domains.length) {
         const manualInputDiv = document.getElementById('manualWebInput');
         const placeholder = document.getElementById('logoPlaceholder');
@@ -249,14 +259,15 @@ function tryDomainsSequentially(domains, index = 0) {
         if (spinner) spinner.style.display = 'none';
         
         if (placeholder) {
-            placeholder.style.display = 'block';
-            placeholder.innerHTML = "No<br>Encontrado";
+            placeholder.style.display = 'flex'; // Flex para centrar
+            placeholder.innerHTML = "LOGO<br>NO<br>ENCONTRADO";
+            placeholder.style.fontSize = "10px"; // Texto pequeño para que quepa
         }
 
         if (manualInputDiv) {
             manualInputDiv.style.display = 'block';
             const inputManual = document.getElementById('webManual');
-            if(inputManual) inputManual.placeholder = "ej: coca-cola.com";
+            if(inputManual) inputManual.placeholder = "ej: fedex.com";
         }
         return;
     }
@@ -264,65 +275,68 @@ function tryDomainsSequentially(domains, index = 0) {
     const domain = domains[index];
     const img = document.getElementById('logoVisual');
     const spinner = document.getElementById('logoSpinner');
-
     if (spinner) spinner.style.display = 'block';
 
-    const logoUrl = `https://logo.clearbit.com/${domain}?size=500`;
+    // Usamos Google API primero (Mas robusto para favicons)
+    const logoUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    
     const tempImg = new Image();
     tempImg.crossOrigin = "Anonymous";
     tempImg.src = logoUrl;
 
     tempImg.onload = () => {
+        // Validar que no sea la imagen de error por defecto de Google (a veces pasa)
+        // Pero asumimos que funciona para simplificar.
         if (spinner) spinner.style.display = 'none';
         if (img) {
             img.src = logoUrl;
             img.style.display = 'block';
         }
-        const manualDiv = document.getElementById('manualWebInput');
-        if (manualDiv) manualDiv.style.display = 'none';
+        document.getElementById('logoPlaceholder').style.display = 'none';
+        document.getElementById('manualWebInput').style.display = 'none';
     };
 
     tempImg.onerror = () => {
+        // Si falla, probar siguiente
         tryDomainsSequentially(domains, index + 1);
     };
 }
 
 // ==========================================
-// 5. TRADUCTOR AUTOMÁTICO (API) - ¡FALTABA ESTO!
+// 4. TRADUCTOR API
 // ==========================================
 async function translateText(text, targetLang) {
-    if (!text || targetLang === 'es') return text; // Si es español, no traducir
+    if (!text || targetLang === 'es') return text;
     try {
-        // Usamos la API gratuita de MyMemory
         const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=es|${targetLang}`);
         const json = await response.json();
         return json.responseData.translatedText || text;
     } catch (e) {
-        console.error("Error traduciendo:", e);
-        return text; // Si falla, devuelve el original
+        console.error("Error API Traducción:", e);
+        return text;
     }
 }
 
 // ==========================================
-// 6. GENERAR PPTX (ACTUALIZADO CON TRADUCCIÓN)
+// 5. GENERAR PPTX
 // ==========================================
 async function generatePowerPoint() {
     const btn = document.getElementById('btnPPT');
     const originalText = btn ? btn.innerHTML : "Generar";
     
-    // Obtener idioma actual
+    // IDIOMA SELECCIONADO
     const currentLang = document.getElementById('langSelect').value || 'es';
-    const t = translations[currentLang]; // Usamos el diccionario nuevo
+    const t = translations[currentLang]; // Diccionario activo
 
     if (btn) { 
-        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${currentLang === 'en' ? 'Translating...' : 'Procesando...'}`; 
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${currentLang === 'en' ? 'Processing...' : 'Procesando...'}`; 
         btn.disabled = true; 
     }
 
     try {
         const data = getFormData();
         
-        // --- FASE DE TRADUCCIÓN AUTOMÁTICA ---
+        // TRADUCCIÓN DE CAMPOS DE TEXTO
         const translatedDescProb = await translateText(data.descripcionProblema, currentLang);
         const translatedDescSol = await translateText(data.descDespues, currentLang);
         const translatedDiag = await translateText(data.diagnostico, currentLang);
@@ -367,11 +381,10 @@ async function generatePowerPoint() {
         }
         pptx.defineSlideMaster({ title: 'CONVERGINT_STYLE', background: { color: 'FFFFFF' }, objects: masterObjects });
 
-        // --- SLIDE 1: PORTADA ---
+        // SLIDE 1: PORTADA
         const slide1 = pptx.addSlide(); 
         slide1.background = { color: C_DARK_BLUE }; 
         if (logoConvergintBase64) slide1.addImage({ data: logoConvergintBase64, x: 7.5, y: 0.3, w: 2.2, h: 1.2 });
-        // USA EL DICCIONARIO
         slide1.addText(t.ppt_title, { x: 0.5, y: 0.8, w: 6, h: 1, fontSize: 28, color: C_WHITE, bold: true, fontFace: 'Arial' });
 
         const drawRow = (label, value, idx) => {
@@ -381,7 +394,6 @@ async function generatePowerPoint() {
             slide1.addShape(pptx.ShapeType.line, { x: 0.5, y: y + 0.35, w: 6.0, h: 0, line: { color: '4A6fa5', width: 1 } });
         };
 
-        // USA ETIQUETAS TRADUCIDAS
         drawRow(t.ppt_loc, data.ubicacion, 0);
         drawRow(t.ppt_client, data.cliente, 1);
         drawRow(t.ppt_tech, data.nombre, 2);
@@ -395,7 +407,7 @@ async function generatePowerPoint() {
         slide1.addText(t.ppt_client, { x: 7.2, y: 4.8, w: 2.5, align: 'center', fontSize: 10, color: 'CCCCCC' });
         if (logoClienteBase64) slide1.addImage({ data: logoClienteBase64, x: 7.3, y: 2.3, w: 2.3, h: 2.3, sizing: { type: 'contain', w: 2.3, h: 2.3 } });
 
-        // --- SLIDE 2: LAYOUT ---
+        // SLIDE 2: LAYOUT
         if (data.imgLayout) {
             const slide2 = pptx.addSlide({ masterName: 'CONVERGINT_STYLE' });
             slide2.addText(t.ppt_layout, { x: 0.5, y: 1.0, fontSize: 18, color: C_WHITE, bold: true });
@@ -403,42 +415,38 @@ async function generatePowerPoint() {
             slide2.addImage({ data: imgData, x: 0.5, y: 1.2, w: 9.0, h: 3.5, sizing: { type: 'contain', w: 9.0, h: 3.5 } });
         }
         
-        // --- SLIDE 3: PROBLEMA ---
+        // SLIDE 3: PROBLEMA
         const slide3 = pptx.addSlide({ masterName: 'CONVERGINT_STYLE' });
         slide3.addText(t.ppt_prob_title, { x: 0.5, y: 0.25, fontSize: 18, color: C_WHITE, bold: true });
         slide3.addShape(pptx.ShapeType.rect, { x: 0.5, y: 1.2, w: 9.0, h: 3.5, fill: { color: 'FAFAFA' }, line: { color: C_DARK_BLUE, width: 2 } });
-        // USA LA DESCRIPCIÓN TRADUCIDA
         slide3.addText(translatedDescProb || "---", { x: 0.6, y: 1.3, w: 8.8, h: 3.3, fontSize: 14, color: '000000', valign: 'top' });
 
-        // --- SLIDE 4: ANTES ---
+        // SLIDE 4: ANTES
         if (data.fotosAntes && data.fotosAntes.length > 0) {
             const slide4 = pptx.addSlide({ masterName: 'CONVERGINT_STYLE' });
             slide4.addText(t.ppt_evid_before, { x: 0.5, y: 0.25, fontSize: 18, color: C_WHITE, bold: true });
             await addPhotosToSlide(slide4, data.fotosAntes, 1.2); 
         }
 
-        // --- SLIDE 5: DESPUÉS ---
+        // SLIDE 5: DESPUÉS
         const slide5 = pptx.addSlide({ masterName: 'CONVERGINT_STYLE' });
         slide5.addText(t.ppt_sol_title, { x: 0.5, y: 0.25, fontSize: 18, color: C_WHITE, bold: true });
         slide5.addText(t.ppt_work_done, { x: 0.5, y: 1.0, fontSize: 12, bold: true, color: C_GREY_TXT });
         slide5.addShape(pptx.ShapeType.rect, { x: 0.5, y: 1.3, w: 9.0, h: 1.0, fill: { color: 'F0F7FF' }, line: { color: C_DARK_BLUE, width: 1 } });
-        // USA LA SOLUCIÓN TRADUCIDA
         slide5.addText(translatedDescSol || "---", { x: 0.6, y: 1.35, w: 8.8, h: 0.9, fontSize: 12, color: '000000', valign: 'top' });
         slide5.addText(t.ppt_photos, { x: 0.5, y: 2.5, fontSize: 12, bold: true, color: C_GREY_TXT });
         if (data.fotosDespues && data.fotosDespues.length > 0) await addPhotosToSlide(slide5, data.fotosDespues, 2.8);
 
-        // --- SLIDE 6: CIERRE ---
+        // SLIDE 6: CIERRE
         const slide6 = pptx.addSlide({ masterName: 'CONVERGINT_STYLE' });
         slide6.addText(t.ppt_close_title, { x: 0.5, y: 0.25, fontSize: 18, color: C_WHITE, bold: true });
         slide6.addShape(pptx.ShapeType.rect, { x: 0.5, y: 1.2, w: 9.0, h: 3.5, fill: { color: 'FFFFFF' }, line: { color: C_DARK_BLUE, width: 2 } });
-        // USA EL DIAGNÓSTICO TRADUCIDO
         slide6.addText((translatedDiag || "") + "\n\n" + (translatedNotes || ""), { x: 0.6, y: 1.3, w: 8.8, h: 3.3, fontSize: 14, color: '000000', valign: 'top' });
 
-        // 1. DESCARGAR
+        // DESCARGAR Y ENVIAR
         const filename = `Reporte_${data.cliente || 'Servicio'}_${data.ticket || 'Ref'}.pptx`;
         await pptx.writeFile({ fileName: filename });
 
-        // 2. ENVIAR AL SERVIDOR
         const pptxBase64 = await pptx.write('base64');
         
         let listaCorreos = [];
@@ -476,14 +484,14 @@ async function generatePowerPoint() {
 
     } catch (err) {
         console.error("ERROR ENVÍO:", err);
-        alert("Reporte descargado. Hubo un error enviando el correo (Revisa consola o estado del servidor Render).");
+        alert("Reporte descargado. Hubo un error enviando el correo.");
     } finally {
         if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
     }
 }
 
 // ==========================================
-// 7. HELPERS
+// 6. HELPERS
 // ==========================================
 function getFormData() {
     const val = (id) => { const el = document.getElementById(id); return el ? el.value : ""; };
