@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportes Convergint | Generador v3.0</title>
-    
+    <title>Reportes Convergint</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
 </head>
@@ -32,7 +27,7 @@
                 <label>Correo Electrónico (@convergint.com)</label>
                 <input type="email" id="loginEmail" placeholder="nombre.apellido@convergint.com" autocomplete="email">
                 <p id="loginError" style="color: #ff4d4d; font-size: 0.85rem; margin-top: 10px; display: none; text-align: center;">
-                    <i class="fa-solid fa-circle-exclamation"></i> Acceso denegado.
+                    <i class="fa-solid fa-circle-exclamation"></i> Acceso denegado. Usa un correo Convergint.
                 </p>
             </div>
 
@@ -67,47 +62,48 @@
                     <h2 data-i18n="projectInfo">Información del Proyecto</h2>
                 </div>
 
-                <div class="client-logo-wrapper">
-                    <div class="client-input-area">
-                        <label for="cliente" class="highlight-label" data-i18n="clientLabel">Nombre del Cliente / Empresa</label>
+                <div class="client-row">
+                    <div style="flex: 1;">
+                        <label for="cliente" style="color: #FF6600; font-weight: bold;" data-i18n="clientLabel">Nombre del Cliente / Empresa</label>
+                        <input type="text" id="cliente" placeholder="Ej: Coca Cola, Ford..." required>
+                        <p class="help-text" data-i18n="clientHelp">* Escribe el nombre y sal para buscar logo.</p>
                         
-                        <div class="search-box-group">
-                            <input type="text" id="cliente" data-i18n-ph="ph_client" placeholder="Ej: Coca Cola, Ford..." required>
-                            <button type="button" id="btnBuscarLogo" class="btn-search" title="Buscar Logo">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-
-                        <p class="help-text" data-i18n="clientHelp">* Presiona la Lupa o Enter para buscar.</p>
-                        
-                        <div id="manualUploadArea" class="manual-upload-box" style="display: none;">
-                            <p style="color: #fca5a5; font-size: 0.8rem; margin-bottom: 5px;">
-                                <i class="fa-solid fa-triangle-exclamation"></i> No encontrado. ¿Deseas subirlo?
-                            </p>
-                            <label for="inputLogoManual" class="btn-manual-upload">
-                                <i class="fa-solid fa-upload"></i> Subir Logo Manualmente
-                            </label>
-                            <input type="file" id="inputLogoManual" accept="image/*" style="display: none;">
-                            <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">* Se guardará en memoria.</p>
+                        <div id="manualWebInput" style="display: none; margin-top: 10px;">
+                            <label style="font-size: 0.8rem;" data-i18n="manualWebLabel">No encontramos el logo. ¿Cuál es su web?</label>
+                            <input type="text" id="webManual" placeholder="ejemplo.com.mx">
                         </div>
                     </div>
 
-                    <div class="logo-preview">
-                        <div class="logo-box">
-                            <span id="logoPlaceholder">Logo<br>Auto</span>
-                            <img id="logoVisual" src="" style="display: none;" crossOrigin="Anonymous">
-                            <div id="logoSpinner" class="spinner" style="display: none;"></div>
-                        </div>
-                        <button type="button" id="btnResetLogo" style="display: none; margin-top: 5px; background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.8rem;">
-                            <i class="fa-solid fa-trash"></i> Quitar
-                        </button>
+                    <div class="logo-preview-box">
+                        <span id="logoPlaceholder">Logo<br>Auto</span>
+                        <img id="logoVisual" src="" style="display: none;" crossOrigin="Anonymous">
+                        <i id="logoSpinner" class="fa-solid fa-spinner fa-spin" style="display: none; color: #003366;"></i>
                     </div>
                 </div>
 
                 <div class="grid-2">
                     <div class="form-group">
-                        <label for="nombreManual" data-i18n="preparedBy">Prepared By (Técnico)</label>
-                        <input type="text" id="nombreManual" data-i18n-ph="ph_manual_name" placeholder="Escribe tu nombre" required>
+                        <label for="ubicacion" data-i18n="location">Locación (Sitio)</label>
+                        <input type="text" id="ubicacion" placeholder="Dirección / Ciudad" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombreSelect" data-i18n="preparedBy">Prepared By (Técnico)</label>
+                        <select id="nombreSelect" required>
+                            <option value="">Selecciona tu nombre...</option>
+                            <option value="Saul Ramirez">Saul Ramirez</option>
+                            <option value="Gustavo Aburto">Gustavo Aburto</option>
+                            <option value="Italia Silva">Italia Silva</option>
+                            <option value="Otro">Otro (Manual)</option>
+                        </select>
+
+                        <div id="manualTechnicianInput" style="display: none; margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; border-left: 3px solid #FF6600;">
+                            <label style="font-size: 0.8rem; color: #FF6600;">Nombre Completo:</label>
+                            <input type="text" id="nombreManual" placeholder="Escribe tu nombre">
+                            
+                            <label style="font-size: 0.8rem; color: #FF6600; margin-top: 8px;">Correo Electrónico:</label>
+                            <input type="email" id="emailManual" placeholder="tucorreo@convergint.com">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -121,22 +117,13 @@
                         </select>
                     </div>
 
-                    <div class="form-group full-width-mobile" style="grid-column: 1 / -1;">
-                        <label for="ubicacion" data-i18n="location">Locación (Sitio)</label>
-                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                            <input type="text" id="ubicacion" data-i18n-ph="ph_location" placeholder="Dirección / Ciudad" required style="flex: 1;">
-                        </div>
-                        <div id="miniMapContainer" style="margin-top: 10px; height: 180px; width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);"></div>
-                        <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 3px;">* Mapa de apoyo visual.</p>
-                    </div>
-
                     <div class="form-group">
                         <label for="fecha" data-i18n="date">Date (Fecha)</label>
                         <input type="date" id="fecha" required>
                     </div>
                     <div class="form-group">
                         <label for="ticket" data-i18n="ticket">Referencia / Ticket</label>
-                        <input type="text" id="ticket" data-i18n-ph="ph_ticket" placeholder="Escribe el ticket..." required>
+                        <input type="text" id="ticket" placeholder="Ej: W123456" required>
                     </div>
                 </div>
             </section>
@@ -179,7 +166,7 @@
                 </div>
                 <div class="form-group full-width">
                     <label data-i18n="problemDesc">Descripción del Problema</label>
-                    <textarea id="descripcionProblema" data-i18n-ph="ph_problem" rows="2" placeholder="¿Qué falla se reportó?"></textarea>
+                    <textarea id="descripcionProblema" rows="2" placeholder="¿Qué falla se reportó?"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label data-i18n="photosBefore">Fotos "Antes" (Evidencia inicial)</label>
@@ -205,7 +192,7 @@
                 </div>
                 <div class="form-group full-width">
                     <label data-i18n="solutionDesc">Solución / Trabajo Realizado</label>
-                    <textarea id="descDespues" data-i18n-ph="ph_solution" rows="3" placeholder="Describe la solución aplicada..."></textarea>
+                    <textarea id="descDespues" rows="3" placeholder="Describe la solución aplicada..."></textarea>
                 </div>
             </section>
 
@@ -216,11 +203,11 @@
                 </div>
                 <div class="form-group full-width">
                     <label data-i18n="diagnosis">Diagnóstico</label>
-                    <textarea id="diagnostico" data-i18n-ph="ph_diagnosis" rows="2" placeholder="Conclusión técnica..."></textarea>
+                    <textarea id="diagnostico" rows="2" placeholder="Conclusión técnica..."></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label data-i18n="finalNotes">Anotaciones Finales</label>
-                    <textarea id="resumen" data-i18n-ph="ph_notes" rows="2" placeholder="Notas adicionales..."></textarea>
+                    <textarea id="resumen" rows="2" placeholder="Notas adicionales..."></textarea>
                 </div>
             </section>
 
@@ -236,7 +223,7 @@
                         2. <strong>Supervisor</strong> seleccionado.
                     </p>
                     <label>Correos adicionales (Opcional):</label>
-                    <input type="text" id="correoDestino" data-i18n-ph="ph_emails" placeholder="gerente@convergint.com (Separar por comas)">
+                    <input type="text" id="correoDestino" placeholder="gerente@convergint.com (Separar por comas)">
                 </div>
             </section>
 
