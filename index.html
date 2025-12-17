@@ -1,265 +1,485 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportes Convergint | Generador</title>
+
+    <title>Reportes Convergint</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
+
     <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+
 </head>
 
+
+
 <body>
+
     <div class="background-gradient"></div>
-    <div class="background-noise"></div>
+
+
 
     <div id="loginOverlay" class="login-container">
-        <div class="card login-card glass-effect">
-            <div class="login-header">
-                <div class="icon-circle">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <h2>Acceso Restringido</h2>
-                <p>Sistema de Reportes Automatizados</p>
-            </div>
-            
-            <div class="form-group">
-                <label>Correo Corporativo</label>
-                <div class="input-with-icon">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="loginEmail" placeholder="nombre.apellido@convergint.com" autocomplete="email">
-                </div>
-                <p id="loginError" class="error-msg">
-                    <i class="fa-solid fa-circle-exclamation"></i> Acceso denegado.
-                </p>
+
+        <div class="card login-card">
+
+            <div style="text-align: center; margin-bottom: 20px; color: #4f46e5;">
+
+                <i class="fa-solid fa-lock fa-3x"></i>
+
             </div>
 
-            <button type="button" onclick="checkLogin()" class="btn btn-primary btn-glow">
-                Ingresar al Sistema <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <h2 style="text-align: center; margin-bottom: 10px; color: white;">Acceso Restringido</h2>
+
+            <p style="text-align: center; color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">
+
+                Ingresa tu correo corporativo para continuar.
+
+            </p>
+
             
-            <div class="login-footer">
-                <small>© 2025 Convergint Technologies</small>
+
+            <div class="form-group">
+
+                <label>Correo Electrónico (@convergint.com)</label>
+
+                <input type="email" id="loginEmail" placeholder="nombre.apellido@convergint.com" autocomplete="email">
+
+                <p id="loginError" style="color: #ff4d4d; font-size: 0.85rem; margin-top: 10px; display: none; text-align: center;">
+
+                    <i class="fa-solid fa-circle-exclamation"></i> Acceso denegado. Usa un correo Convergint.
+
+                </p>
+
             </div>
+
+
+
+            <button type="button" onclick="checkLogin()" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 15px;">
+
+                Ingresar al Sistema
+
+            </button>
+
         </div>
+
     </div>
 
-    <div id="mainApp" class="container fade-in" style="display: none;">
+
+
+    <div id="mainApp" class="container" style="display: none;">
+
         
+
         <header class="header">
-            <div class="top-bar">
-                <span class="badge">v2.0 Beta</span>
-                <div class="language-selector">
-                    <i class="fa-solid fa-globe"></i>
-                    <select id="langSelect">
-                        <option value="es">Español</option>
-                        <option value="en">English</option>
-                        <option value="pt">Português</option>
-                    </select>
-                </div>
+
+            <div class="language-selector">
+
+                <select id="langSelect">
+
+                    <option value="es">🇪🇸 Español</option>
+
+                    <option value="en">🇺🇸 English</option>
+
+                    <option value="pt">🇧🇷 Português</option>
+
+                </select>
+
             </div>
-            
-            <div class="logo-title-group">
-                <div class="app-logo">
-                    <i class="fa-solid fa-file-powerpoint"></i>
-                </div>
-                <div>
-                    <h1 data-i18n="title">Reporte de Servicio</h1>
-                    <p class="subtitle" data-i18n="subtitle">Generador Inteligente</p>
-                </div>
+
+            <div class="logo-container">
+
+                <i class="fa-solid fa-file-powerpoint fa-2x"></i>
+
+                <h1 data-i18n="title">Reporte de Servicio</h1>
+
             </div>
+
+            <p class="subtitle" data-i18n="subtitle">Generador Automatizado</p>
+
         </header>
+
+
 
         <form id="serviceForm">
 
-            <section class="card glass-effect">
+
+
+            <section class="card">
+
                 <div class="card-header">
-                    <div class="header-icon"><i class="fa-solid fa-briefcase"></i></div>
+
+                    <i class="fa-solid fa-user-tie"></i>
+
                     <h2 data-i18n="projectInfo">Información del Proyecto</h2>
+
                 </div>
 
-                <div class="client-logo-wrapper">
-                    <div class="client-input-area">
-                        <label for="cliente" class="highlight-label" data-i18n="clientLabel">Cliente / Empresa</label>
-                        <div class="input-with-icon">
-                            <i class="fa-solid fa-building"></i>
-                            <input type="text" id="cliente" placeholder="Escribe y presiona Enter..." required>
-                        </div>
-                        <p class="help-text" data-i18n="clientHelp">* Detectamos el logo automáticamente.</p>
+
+
+                <div class="client-row">
+
+                    <div style="flex: 1;">
+
+                        <label for="cliente" style="color: #FF6600; font-weight: bold;" data-i18n="clientLabel">Nombre del Cliente / Empresa</label>
+
+                        <input type="text" id="cliente" placeholder="Ej: Coca Cola, Ford..." required>
+
+                        <p class="help-text" data-i18n="clientHelp">* Escribe el nombre y sal para buscar logo.</p>
+
                         
-                        <div id="manualWebInput" class="manual-web-box" style="display: none;">
-                            <label data-i18n="manualWebLabel">¿Web del cliente?</label>
-                            <input type="text" id="webManual" placeholder="ej: empresa.com">
+
+                        <div id="manualWebInput" style="display: none; margin-top: 10px;">
+
+                            <label style="font-size: 0.8rem;" data-i18n="manualWebLabel">No encontramos el logo. ¿Cuál es su web?</label>
+
+                            <input type="text" id="webManual" placeholder="ejemplo.com.mx">
+
                         </div>
+
                     </div>
 
-                    <div class="logo-preview">
-                        <div class="logo-box">
-                            <span id="logoPlaceholder">Sin Logo</span>
-                            <img id="logoVisual" src="" style="display: none;" crossOrigin="Anonymous">
-                            <div id="logoSpinner" class="spinner" style="display: none;"></div>
-                        </div>
+
+
+                    <div class="logo-preview-box">
+
+                        <span id="logoPlaceholder">Logo<br>Auto</span>
+
+                        <img id="logoVisual" src="" style="display: none;" crossOrigin="Anonymous">
+
+                        <i id="logoSpinner" class="fa-solid fa-spinner fa-spin" style="display: none; color: #003366;"></i>
+
                     </div>
+
                 </div>
+
+
 
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label data-i18n="location">Locación</label>
-                        <input type="text" id="ubicacion" placeholder="Ciudad / Sitio" required>
-                    </div>
 
                     <div class="form-group">
-                        <label data-i18n="preparedBy">Técnico</label>
+
+                        <label for="ubicacion" data-i18n="location">Locación (Sitio)</label>
+
+                        <input type="text" id="ubicacion" placeholder="Dirección / Ciudad" required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="nombreSelect" data-i18n="preparedBy">Prepared By (Técnico)</label>
+
                         <select id="nombreSelect" required>
-                            <option value="">Selecciona...</option>
+
+                            <option value="">Selecciona tu nombre...</option>
+
                             <option value="Saul Ramirez">Saul Ramirez</option>
+
                             <option value="Gustavo Aburto">Gustavo Aburto</option>
+
                             <option value="Italia Silva">Italia Silva</option>
+
                             <option value="Otro">Otro (Manual)</option>
+
                         </select>
-                        
-                        <div id="manualTechnicianInput" class="manual-tech-box" style="display: none;">
-                            <input type="text" id="nombreManual" placeholder="Tu Nombre">
-                            <input type="email" id="emailManual" placeholder="Tu Correo">
+
+
+
+                        <div id="manualTechnicianInput" style="display: none; margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; border-left: 3px solid #FF6600;">
+
+                            <label style="font-size: 0.8rem; color: #FF6600;">Nombre Completo:</label>
+
+                            <input type="text" id="nombreManual" placeholder="Escribe tu nombre">
+
+                            <label style="font-size: 0.8rem; color: #FF6600; margin-top: 8px;">Correo Electrónico:</label>
+
+                            <input type="email" id="emailManual" placeholder="tucorreo@convergint.com">
+
                         </div>
+
                     </div>
 
+
+
                     <div class="form-group">
-                        <label data-i18n="revisedBy">Supervisor</label>
+
+                        <label for="revisadoPor" data-i18n="revisedBy">Revised By (Supervisor)</label>
+
                         <select id="revisadoPor" required>
-                            <option value="">Selecciona...</option>
+
+                            <option value="">Seleccionar supervisor...</option>
+
                             <option value="Saul Ramirez">Saul Ramírez</option>
+
                             <option value="Italia Silva">Italia Silva</option>
+
                             <option value="Juan Torres">Juan Torres</option>
+
                             <option value="Gustavo Aburto">Gustavo Aburto</option>
+
                         </select>
+
                     </div>
 
+
+
                     <div class="form-group">
-                        <label data-i18n="date">Fecha</label>
+
+                        <label for="fecha" data-i18n="date">Date (Fecha)</label>
+
                         <input type="date" id="fecha" required>
+
                     </div>
-                    <div class="form-group full-width-mobile">
-                        <label data-i18n="ticket">Ticket / Referencia</label>
-                        <input type="text" id="ticket" placeholder="W-000000" required>
+
+                    <div class="form-group">
+
+                        <label for="ticket" data-i18n="ticket">Referencia / Ticket</label>
+
+                        <input type="text" id="ticket" placeholder="Ej: W123456" required>
+
                     </div>
+
                 </div>
+
             </section>
 
-            <section class="card glass-effect">
+
+
+            <section class="card">
+
                 <div class="card-header">
-                    <div class="header-icon"><i class="fa-solid fa-clock"></i></div>
-                    <h2 data-i18n="visitDetails">Visita & Tiempos</h2>
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <h2 data-i18n="visitDetails">Detalles de Visita</h2>
+
                 </div>
+
                 <div class="grid-3">
+
                     <div class="form-group">
-                        <label data-i18n="visitNo"># Visita</label>
+
+                        <label for="visita" data-i18n="visitNo">No. Visita</label>
+
                         <input type="number" id="visita" placeholder="1" min="1">
+
                     </div>
+
                     <div class="form-group">
-                        <label data-i18n="startTime">Entrada</label>
+
+                        <label for="horarioinicio" data-i18n="startTime">Hora Entrada</label>
+
                         <input type="time" id="horarioinicio" required>
+
                     </div>
+
                     <div class="form-group">
-                        <label data-i18n="endTime">Salida</label>
+
+                        <label for="horariofinal" data-i18n="endTime">Hora Salida</label>
+
                         <input type="time" id="horariofinal" required>
+
                     </div>
+
                 </div>
-                <div class="form-group full-width mt-2">
-                    <label data-i18n="layoutLabel">Layout</label>
+
+                <div class="form-group full-width">
+
+                    <label data-i18n="layoutLabel">Layout (Plano/Esquema)</label>
+
                     <div class="file-upload-wrapper">
+
                         <input type="file" id="imgLayout" accept="image/*">
-                        <div class="upload-content">
-                            <i class="fa-solid fa-map-location-dot fa-2x"></i>
-                            <span data-i18n="uploadLayout">Subir Imagen</span>
+
+                        <div class="file-upload-placeholder">
+
+                            <i class="fa-solid fa-map"></i>
+
+                            <span data-i18n="uploadLayout">Subir Imagen del Layout</span>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </section>
 
-            <section class="card glass-effect">
+
+
+            <section class="card">
+
                 <div class="card-header">
-                    <div class="header-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-                    <h2 data-i18n="serviceDev">Desarrollo</h2>
-                </div>
-                
-                <div class="form-group full-width">
-                    <label data-i18n="problemDesc">Problema Reportado</label>
-                    <textarea id="descripcionProblema" rows="2" placeholder="Describe la falla..."></textarea>
+
+                    <i class="fa-solid fa-tools"></i>
+
+                    <h2 data-i18n="serviceDev">Desarrollo del Servicio</h2>
+
                 </div>
 
                 <div class="form-group full-width">
-                    <label class="label-badge red" data-i18n="photosBefore">Evidencia Inicial (Antes)</label>
-                    <div class="file-upload-wrapper small">
+
+                    <label data-i18n="problemDesc">Descripción del Problema</label>
+
+                    <textarea id="descripcionProblema" rows="2" placeholder="¿Qué falla se reportó?"></textarea>
+
+                </div>
+
+                <div class="form-group full-width">
+
+                    <label data-i18n="photosBefore">Fotos "Antes" (Evidencia inicial)</label>
+
+                    <div class="file-upload-wrapper">
+
                         <input type="file" id="fotosAntes" accept="image/*" multiple>
-                        <div class="upload-content">
+
+                        <div class="file-upload-placeholder">
+
                             <i class="fa-solid fa-camera"></i>
-                            <span data-i18n="selectPhotos">Añadir Fotos</span>
+
+                            <span data-i18n="selectPhotos">Seleccionar fotos</span>
+
                         </div>
+
                     </div>
-                    <div id="previewAntes" class="image-preview-strip"></div>
+
+                    <div id="previewAntes" class="image-preview-container"></div>
+
                 </div>
 
                 <div class="form-group full-width">
-                    <label data-i18n="solutionDesc">Solución Aplicada</label>
-                    <textarea id="descDespues" rows="3" placeholder="Describe qué hiciste..."></textarea>
-                </div>
 
-                <div class="form-group full-width">
-                    <label class="label-badge green" data-i18n="photosAfter">Evidencia Final (Después)</label>
-                    <div class="file-upload-wrapper small">
+                    <label data-i18n="photosAfter">Fotos "Después" (Solución)</label>
+
+                    <div class="file-upload-wrapper">
+
                         <input type="file" id="fotosDespues" accept="image/*" multiple>
-                        <div class="upload-content">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span data-i18n="selectPhotos">Añadir Fotos</span>
+
+                        <div class="file-upload-placeholder">
+
+                            <i class="fa-solid fa-check-double"></i>
+
+                            <span data-i18n="selectPhotos">Seleccionar fotos</span>
+
                         </div>
+
                     </div>
-                    <div id="previewDespues" class="image-preview-strip"></div>
+
+                    <div id="previewDespues" class="image-preview-container"></div>
+
                 </div>
+
+                <div class="form-group full-width">
+
+                    <label data-i18n="solutionDesc">Solución / Trabajo Realizado</label>
+
+                    <textarea id="descDespues" rows="3" placeholder="Describe la solución aplicada..."></textarea>
+
+                </div>
+
             </section>
 
-            <section class="card glass-effect">
+
+
+            <section class="card">
+
                 <div class="card-header">
-                    <div class="header-icon"><i class="fa-solid fa-file-signature"></i></div>
-                    <h2 data-i18n="closing">Cierre Técnico</h2>
+
+                    <i class="fa-solid fa-clipboard-check"></i>
+
+                    <h2 data-i18n="closing">Cierre</h2>
+
                 </div>
+
                 <div class="form-group full-width">
-                    <label data-i18n="diagnosis">Diagnóstico Final</label>
-                    <textarea id="diagnostico" rows="2"></textarea>
+
+                    <label data-i18n="diagnosis">Diagnóstico</label>
+
+                    <textarea id="diagnostico" rows="2" placeholder="Conclusión técnica..."></textarea>
+
                 </div>
+
                 <div class="form-group full-width">
-                    <label data-i18n="finalNotes">Notas Adicionales</label>
-                    <textarea id="resumen" rows="2"></textarea>
+
+                    <label data-i18n="finalNotes">Anotaciones Finales</label>
+
+                    <textarea id="resumen" rows="2" placeholder="Notas adicionales..."></textarea>
+
                 </div>
+
             </section>
 
-            <section class="card glass-effect border-glow">
+
+
+            <section class="card" style="border: 1px solid rgba(79, 70, 229, 0.3);">
+
                 <div class="card-header">
-                    <div class="header-icon"><i class="fa-solid fa-paper-plane"></i></div>
-                    <h2>Envío</h2>
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <h2>Envío de Reporte</h2>
+
                 </div>
+
                 <div class="form-group full-width">
-                    <label>Destinatarios Extra (Opcional)</label>
-                    <input type="text" id="correoDestino" placeholder="correo1@convergint.com, correo2@...">
-                    <p class="info-text"><i class="fa-solid fa-info-circle"></i> Se envía copia a ti y al supervisor.</p>
+
+                    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">
+
+                        El reporte se enviará automáticamente a: <br>
+
+                        1. <strong>Técnico</strong> (Tú)<br>
+
+                        2. <strong>Supervisor</strong> seleccionado.
+
+                    </p>
+
+                    <label>Correos adicionales (Opcional):</label>
+
+                    <input type="text" id="correoDestino" placeholder="gerente@convergint.com (Separar por comas)">
+
                 </div>
+
             </section>
+
+
 
             <div class="actions">
-                <button type="submit" id="btnPPT" class="btn btn-primary btn-lg btn-glow">
-                    <span data-i18n="generateBtn">Generar Reporte</span> <i class="fa-solid fa-rocket"></i>
+
+                <button type="submit" id="btnPPT" class="btn btn-primary">
+
+                    <i class="fa-solid fa-file-powerpoint"></i> <span data-i18n="generateBtn">Generar y Enviar Reporte</span>
+
                 </button>
+
             </div>
 
-            <footer class="app-footer">
-                <p>Desarrollado por Hector Emmanuel Salazar | <i class="fa-solid fa-code"></i> v2.0</p>
-            </footer>
         </form>
+
     </div>
 
-    <img id="convergintLogoHidden" src="https://www.convergint.com/nitropack_static/DDfQZZpsFKtjBMALGCBVlZvVuWVdCNdj/assets/images/optimized/rev-4ba1d7e/www.convergint.com/wp-content/uploads/2021/06/Convergint-Logo-white-with-registered-trademark-640X360-600x338.png" style="display: none;" crossOrigin="Anonymous">
+
+
+    <img id="convergintLogoHidden"
+
+        src="https://www.convergint.com/nitropack_static/DDfQZZpsFKtjBMALGCBVlZvVuWVdCNdj/assets/images/optimized/rev-4ba1d7e/www.convergint.com/wp-content/uploads/2021/06/Convergint-Logo-white-with-registered-trademark-640X360-600x338.png"
+
+        style="display: none;" crossOrigin="Anonymous">
+
+
 
     <script src="script.js"></script>
+
 </body>
+
 </html>
