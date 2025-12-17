@@ -74,43 +74,25 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); }
 
 /* ÁREA CLIENTE Y LOGO */
-.client-logo-wrapper { display: flex; gap: 20px; margin-bottom: 20px; flex-direction: column-reverse; }
-@media(min-width: 600px) { .client-logo-wrapper { flex-direction: row; } }
-.client-input-area { flex: 1; }
-
-.search-box-group { display: flex; gap: 10px; width: 100%; }
-.search-box-group input { flex-grow: 1; }
-
-.btn-search {
-    background: var(--primary-color); color: white; border: none;
-    border-radius: 8px; width: 50px; cursor: pointer; font-size: 1.2rem;
-    display: flex; align-items: center; justify-content: center; transition: background 0.3s;
+.client-row {
+    display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;
+    background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px;
 }
-.btn-search:hover { background: #4338ca; }
+.logo-preview-box {
+    width: 100%; height: 100px; background: white; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; border: 2px solid #eee;
+}
+.logo-preview-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
+#logoPlaceholder { color: #64748b; font-size: 0.8rem; text-align: center; font-weight: 800; }
 
-/* CAJA MANUAL */
-.manual-upload-box {
-    margin-top: 10px; padding: 10px; background: rgba(239, 68, 68, 0.1);
-    border: 1px dashed #ef4444; border-radius: 8px; animation: fadeIn 0.3s;
-}
-.btn-manual-upload {
-    display: block; width: 100%; padding: 8px; background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; text-align: center;
-    cursor: pointer; font-size: 0.9rem; margin-top: 5px; color: white;
-}
-.btn-manual-upload:hover { background: rgba(255,255,255,0.2); }
+/* Spinner */
+.fa-spinner { font-size: 2rem; color: var(--primary-color); }
 
-/* LOGO CIRCLE (Corregido) */
-.logo-preview { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.logo-box {
-    width: 100px; height: 100px; min-width: 100px;
-    background: white; border-radius: 50%; border: 4px solid rgba(255,255,255,0.1);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; padding: 2px;
+@media (min-width: 600px) {
+    .client-row { flex-direction: row; align-items: flex-start; }
+    .logo-preview-box { width: 120px; height: 100px; flex-shrink: 0; }
 }
-.logo-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
-#logoPlaceholder { color: #64748b; font-size: 10px; line-height: 1.2; font-weight: 800; text-transform: uppercase; text-align: center; width: 100%; word-wrap: break-word; }
-.spinner { width: 30px; height: 30px; border: 3px solid rgba(0,0,0,0.1); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; }
 
 /* FILES */
 .file-upload-wrapper {
@@ -134,7 +116,30 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--p
 .btn-primary { background: var(--primary-color); color: #fff; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4); }
 .help-text { font-size: 0.8rem; color: #94a3b8; margin-top: 5px; }
 
-/* LOGIN (Diseño Original Preservado) */
+/* ESTILOS DE BÚSQUEDA Y MANUAL (Nuevos) */
+.search-box-group { display: flex; gap: 8px; width: 100%; }
+.btn-search {
+    background: var(--primary-color); color: white; border: none;
+    border-radius: 8px; width: 50px; cursor: pointer; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+}
+.btn-search:hover { background: #4338ca; }
+
+.manual-upload-box {
+    margin-top: 10px; padding: 10px; background: rgba(239, 68, 68, 0.1);
+    border: 1px dashed #ef4444; border-radius: 8px;
+}
+.btn-manual-upload {
+    display: block; width: 100%; padding: 8px; background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; text-align: center;
+    cursor: pointer; font-size: 0.9rem; margin-top: 5px; color: white;
+}
+.btn-manual-upload:hover { background: rgba(255,255,255,0.2); }
+
+/* MAPA LEAFLET */
+.leaflet-container { font-family: 'Inter', sans-serif; z-index: 1; }
+
+/* LOGIN (Estilo Original Preservado) */
 .login-container {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     display: flex; justify-content: center; align-items: center;
@@ -142,8 +147,4 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--p
 }
 .login-card { width: 100%; max-width: 400px; background: #1e293b; border: 1px solid rgba(79, 70, 229, 0.5); padding: 30px 20px; }
 .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
-.manual-tech-box { margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-left: 2px solid var(--primary-color); border-radius: 0 8px 8px 0; }
-
 @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
